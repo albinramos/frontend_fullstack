@@ -1,0 +1,15 @@
+.register__form{
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.form__name, 
+.form__last,
+.form__email,
+.form__phone,
+.form__password,
+.form__file{
+  margin-bottom: 20px;
+}
