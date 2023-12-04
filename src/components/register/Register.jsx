@@ -8,7 +8,12 @@ const Register = () => {
 
   const [phone, setPhone] = useState('');
 
+  const pageStyles = {
+    minHeight: '100vh'
+  };
+
   return (
+    <div style={pageStyles}>
     <section className="register">
     <h1>Register</h1>
     <form className='register__form'>
@@ -27,6 +32,7 @@ const Register = () => {
     <button type="submit">Login</button>
   </form>  
   </section>
+  </div>
 
   )
 

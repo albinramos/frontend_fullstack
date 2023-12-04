@@ -6,8 +6,12 @@ import './login.css';
 const Login = () => {
 
   const [phone, setPhone] = useState('');
+  const pageStyles = {
+    minHeight: '100vh'
+  };
 
   return (
+    <div style={pageStyles}>
     <section className="login">
       <h1>Login</h1>
       <form className='login__form'>
@@ -17,6 +21,7 @@ const Login = () => {
       </form>    
       
     </section>
+  </div>
   );
 
 }
