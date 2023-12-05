@@ -28,8 +28,10 @@ const Register = () => {
     />
   </div>
     <input type="password" placeholder="Password" className='form__password'/>
+    <input type="password" placeholder="Confirm Password" className='form__password'/>
+    <p className='register__photo'>Select your profile photo:</p>
     <input type='file' className='form__file'/>
-    <button type="submit">Login</button>
+    <button type="submit">Register</button>
   </form>  
   </section>
   </div>

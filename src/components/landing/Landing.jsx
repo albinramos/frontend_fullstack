@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, Component } from 'react';
 import { houses } from '../../Data';
 import './landing.css';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+
 
 const Landing = () => {
   const pageStyles = {
@@ -9,42 +13,61 @@ const Landing = () => {
 
   const [randomHouses, setRandomHouses] = useState([]);
 
-  const getCityName = async (latitude, longitude) => {
+  const getCityName = async (lat, lon) => {
     try {
-      const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
+      const apiKey = '19ad8885f90bc4592b407518f2859bf2';
+      const response = await fetch(`http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${apiKey}`);
       const data = await response.json();
-      return data.address.city || data.address.town || data.address.village || data.address.hamlet || data.address.county;
-    } catch (error) {
-      console.error('Error fetching city name:', error);
+      const cityName = Array.isArray(data) && data.length > 0 ? data[0] : null;
+      console.log('data:', data);
+      //console.log('data.name:', data.name);
+      console.log('cityName:', cityName);
+      return cityName.name;
+    } 
+    catch (error) {
+      console.error('Error fetching city name:', error.message);
       return '';
     }
   };
 
+  
+
   const getRandomHouses = async () => {
     const shuffledHouses = houses.sort(() => 1 - Math.random());
-    const selectedHouses = shuffledHouses.slice(0, 10);
+    const selectedHouses = shuffledHouses.slice(0, 12);
 
-    // Obtener el nombre de la ciudad para cada casa
-    const housesWithCityNames = await Promise.all(
-      selectedHouses.map(async (house) => {
-        const [latitude, longitude] = house.locationValue.split(',').map(Number);
-        const cityName = await getCityName(latitude, longitude);
-        return { ...house, cityName };
-      })
-    );
-
-    setRandomHouses(housesWithCityNames);
+    try {
+      const housesWithCityNames = await Promise.all(
+        selectedHouses.map(async (house) => {
+          const [lat, lon] = house.locationValue.split(',').map(Number);
+          const cityName = await getCityName(lat, lon);
+          //console.log('ciudad:', cityName.name);
+          return { ...house, cityName };
+        })
+      );
+  
+      setRandomHouses(housesWithCityNames);
+    } catch (error) {
+      console.error('Error fetching city names for houses:', error.message);
+    }
   };
-
-    // Llama a la función al montar el componente
-    React.useEffect(() => {
-      getRandomHouses();
-    }, []);
+  
+  // Llama a la función al montar el componente
+  React.useEffect(() => {
+    getRandomHouses();
+  }, []);
   
     return (
       <div style={pageStyles}>
         <section className="landing">
           <h1>Landing</h1>
+          <div className='landing__input'>
+          <form className='register__form'>
+            <input type='text' placeholder='First Name'className='form__name'/>
+            <input type='text' placeholder='Last Name'className='form__last'/>
+            <input type="email" placeholder="Email" className='form__email'/>
+          </form>
+          </div>
           <div className='landing__container'>
             {randomHouses.map((house, index) => {
               let imageElement;
@@ -64,6 +87,7 @@ const Landing = () => {
                   <h2 className='landing__h2-title'>{house.title}</h2>
                   <p>City: {house.cityName}</p>
                   <p>Guest Count: {house.guestCount}</p>
+
                   {imageElement}
                 </div>
               );

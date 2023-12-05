@@ -155,4 +155,18 @@ export const houses = [
     locationValue: '33.6844, -117.8265', // Coordenadas de Newport Beach
     price: 400,
   },
+  {
+    user_id: 13,
+    title: 'Casa Moderna con Jardín Exuberante',
+    description: 'Elegante casa moderna con un hermoso jardín, perfecta para relajarse y disfrutar de la naturaleza.',
+    imageSrc: [],
+    createdAt: '2023-03-15',
+    category: 'chalet',
+    roomCount: 4,
+    bathroomCount: 3,
+    guestCount: 8,
+    locationValue: '34.0522, -118.2437', // Coordenadas de Los Ángeles
+    price: 300,
+  },
+
 ]

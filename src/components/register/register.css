@@ -13,3 +13,8 @@
 .form__file{
   margin-bottom: 20px;
 }
+
+.register__photo{
+  display: flex;
+  justify-content: start;
+}

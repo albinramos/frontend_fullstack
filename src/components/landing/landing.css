@@ -19,3 +19,22 @@
   object-fit: cover;
   border-radius: 10px;
 }
+
+.landing__form-input{
+  margin: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.form__city,
+.form__arrival-date,
+.form__leave-date,
+.form__guests{
+  margin: 10px;
+  display: flex;
+  font-size: 18px;
+  border-radius: 10px;
+  height: 30px;
+}
