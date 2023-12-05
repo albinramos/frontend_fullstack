@@ -62,11 +62,13 @@ const Landing = () => {
         <section className="landing">
           <h1>Landing</h1>
           <div className='landing__input'>
-          <form className='register__form'>
-            <input type='text' placeholder='First Name'className='form__name'/>
-            <input type='text' placeholder='Last Name'className='form__last'/>
-            <input type="email" placeholder="Email" className='form__email'/>
+          <form className='landing__form'>
+            <input type='text' placeholder='City'className='form__city'/>
+            <input type='date' placeholder='Arrival Date'className='form__arrival-date'/>
+            <input type="date" placeholder="Depart Date" className='form__depart-date'/>
+            <input type="number" placeholder="Guests" className='form__guests'/>
           </form>
+          <button type="submit">Submit</button>
           </div>
           <div className='landing__container'>
             {randomHouses.map((house, index) => {

@@ -11,6 +11,7 @@ export const houses = [
     guestCount: 6,
     locationValue: '40.7128, -74.0060', // Coordenadas de Nueva York
     price: 200,
+    amenities: ['wifi', 'parking', 'swimming pool'],
   },
   {
     user_id: 2,
@@ -24,6 +25,7 @@ export const houses = [
     guestCount: 6,
     locationValue: '34.0522, -118.2437', // Coordenadas de Los Ángeles
     price: 150,
+    amenities: ['wifi', 'parking', 'air conditioned'],
   },
   {
     user_id: 3,

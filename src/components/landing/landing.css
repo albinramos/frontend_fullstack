@@ -20,7 +20,7 @@
   border-radius: 10px;
 }
 
-.landing__form-input{
+.landing__input{
   margin: 10px;
   display: flex;
   flex-direction: row;
@@ -30,11 +30,17 @@
 
 .form__city,
 .form__arrival-date,
-.form__leave-date,
+.form__depart-date,
 .form__guests{
   margin: 10px;
   display: flex;
   font-size: 18px;
   border-radius: 10px;
   height: 30px;
+  text-align: center;
+}
+
+.landing__form{
+  display: flex;
+  flex-direction: row;
 }
