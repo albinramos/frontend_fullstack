@@ -3,12 +3,14 @@ import { houses } from '../../Data';
 import './landing.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate, Link } from 'react-router-dom'; 
 
 const Landing = () => {
   const pageStyles = {
     minHeight: '100vh'
   };
+
+  const navigate = useNavigate();
 
   const [randomHouses, setRandomHouses] = useState([]);
   const [city, setCity] = useState('');
@@ -58,6 +60,7 @@ const Landing = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     searchHouses(city, arrivalDate, departDate, guests);
+    navigate('/search', { state: { city, arrivalDate, departDate, guests } });
   };
 
   const searchHouses = (city, arrivalDate, departDate, guests) => {
