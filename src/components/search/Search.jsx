@@ -4,7 +4,9 @@ import './search.css';
 
 const Search = () => {  
   const location = useLocation();
-  const { city, arrivalDate, departDate, guests } = location.state || {};
+  const { city, arrivalDate, departDate, guests, country } = location.state || {};
+  console.log('City:', city);
+  console.log('Country:', country);
 
   const pageStyles = {
     minHeight: '100vh',
@@ -17,6 +19,7 @@ const Search = () => {
         <h1>Search Results</h1>
         {/* Utiliza los datos en tu componente Search */}
         <p>City: {city}</p>
+        <p>Country: {country}</p>
         <p>Arrival Date: {arrivalDate}</p>
         <p>Depart Date: {departDate}</p>
         <p>Guests: {guests}</p>

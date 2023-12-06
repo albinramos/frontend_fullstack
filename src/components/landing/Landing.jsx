@@ -8,18 +8,22 @@ const Landing = () => {
     minHeight: '100vh'
   };
 
-  const handleCitySelection = (selectedCity) => {
-    setCity(selectedCity);
-  };
 
   const navigate = useNavigate();
 
   const [randomHouses, setRandomHouses] = useState([]);
   const [city, setCity] = useState('');
+  const [country, setCountry] = useState('');
   const [arrivalDate, setArrivalDate] = useState('');
   const [departDate, setDepartDate] = useState('');
   const [guests, setGuests] = useState(1);
 
+
+  const handleCitySelection = (selectedCity, selectedCountry) => {
+    setCity(selectedCity);
+    setCountry(selectedCountry);
+  };
+  
   const getCityName = async (lat, lon) => {
     try {
       const apiKey = '19ad8885f90bc4592b407518f2859bf2';
@@ -61,13 +65,16 @@ const Landing = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    searchHouses(city, arrivalDate, departDate, guests);
-    navigate('/search', { state: { city, arrivalDate, departDate, guests } });
+    searchHouses(city, arrivalDate, departDate, guests, country);
+    navigate('/search', { state: { city, arrivalDate, departDate, guests, country } });
+    console.log('City1:', city);
+    console.log('Country1:', country);
   };
 
-  const searchHouses = (city, arrivalDate, departDate, guests) => {
+  const searchHouses = (city, arrivalDate, departDate, guests, country) => {
     console.log('Búsqueda de casas con los siguientes criterios:');
     console.log('City:', city);
+    console.log('Country:', country);
     console.log('Arrival Date:', arrivalDate);
     console.log('Depart Date:', departDate);
     console.log('Guests:', guests);
