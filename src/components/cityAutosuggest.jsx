@@ -20,7 +20,11 @@ const CityAutosuggest = ({ onSelectCity }) => {
 
   const getSuggestionValue = (suggestion) => suggestion.name;
 
-  const renderSuggestion = (suggestion) => <div>{suggestion.name}</div>;
+  const renderSuggestion = (suggestion) => 
+  <div>
+    <div>{suggestion.name}</div>
+    <div>Country: {suggestion.country}</div>
+  </div>;
 
   const onChange = (_, { newValue }) => {
     setValue(newValue);
