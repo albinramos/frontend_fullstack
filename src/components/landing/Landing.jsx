@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { houses } from '../../Data';
 import './landing.css';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { useNavigate, Link } from 'react-router-dom'; 
-
+import CityAutosuggest from './../cityAutosuggest'
 const Landing = () => {
   const pageStyles = {
     minHeight: '100vh'
+  };
+
+  const handleCitySelection = (selectedCity) => {
+    setCity(selectedCity);
   };
 
   const navigate = useNavigate();
@@ -77,7 +79,7 @@ const Landing = () => {
         <h1>Landing</h1>
         <div className='landing__input'>
           <form className='landing__form' onSubmit={handleSubmit}>
-            <input type='text' placeholder='City' className='form__city' value={city} onChange={(e) => setCity(e.target.value)} />
+            <CityAutosuggest onSelectCity={handleCitySelection}/>
             <input type='date' placeholder='Arrival Date' className='form__arrival-date' value={arrivalDate} onChange={(e) => setArrivalDate(e.target.value)} />
             <input type="date" placeholder="Depart Date" className='form__depart-date' value={departDate} onChange={(e) => setDepartDate(e.target.value)} />
             <input type="number" placeholder="Guests" className='form__guests' value={guests} onChange={(e) => setGuests(e.target.value)} />
