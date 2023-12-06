@@ -3,6 +3,7 @@ import Home from './components/home/Home'
 import Login from './components/login/Login'
 import Register from './components/register/Register'
 import Landing from './components/landing/Landing'
+import Search from './components/search/Search'
 import './App.css'
 
 function App() {
@@ -13,7 +14,8 @@ function App() {
         <Landing />
         <Home />
         <Login />
-        <Register />    
+        <Register />
+        <Search />  
       </main>
     </>
   )
