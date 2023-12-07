@@ -31,8 +31,8 @@ const CityAutosuggest = ({ onSelectCity }) => {
   };
 
   const onSuggestionSelected = (_, { suggestion }) => {
-    console.log('Selected City:', suggestion.name);
-    console.log('Selected Country:', suggestion.country);
+    //console.log('Selected City:', suggestion.name);
+    //console.log('Selected Country:', suggestion.country);
     onSelectCity(suggestion.name, suggestion.country);
   };
 

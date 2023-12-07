@@ -39,6 +39,7 @@ export const houses = [
     guestCount: 2,
     locationValue: '51.5074, -0.1278', // Coordenadas de Londres
     price: 90,
+    amenities: ['wifi', 'parking', 'air conditioned'],
   },
   {
     user_id: 4,
@@ -52,6 +53,7 @@ export const houses = [
     guestCount: 4,
     locationValue: '40.4168, -3.7038', // Coordenadas de Madrid
     price: 180,
+    amenities: ['wifi', 'parking', 'air conditioned'],
   },
   {
     user_id: 5,
@@ -65,6 +67,7 @@ export const houses = [
     guestCount: 10,
     locationValue: '41.9028, 12.4964', // Coordenadas de Roma
     price: 350,
+    amenities: ['wifi', 'parking', 'air conditioned'],
   },
   {
     user_id: 6,
@@ -78,6 +81,7 @@ export const houses = [
     guestCount: 2,
     locationValue: '45.4215, -75.6993', // Coordenadas de Ottawa
     price: 80,
+    amenities: ['wifi', 'parking', 'air conditioned'],
   },
   {
     user_id: 7,
@@ -91,6 +95,7 @@ export const houses = [
     guestCount: 4,
     locationValue: '48.8566, 2.3522', // Coordenadas de París
     price: 130,
+    amenities: ['wifi', 'parking', 'air conditioned'],
   },
   {
     user_id: 8,
@@ -104,6 +109,7 @@ export const houses = [
     guestCount: 6,
     locationValue: '25.7617, -80.1918', // Coordenadas de Miami
     price: 220,
+    amenities: ['wifi', 'parking', 'air conditioned'],
   },
   {
     user_id: 9,
@@ -117,6 +123,7 @@ export const houses = [
     guestCount: 8,
     locationValue: '47.6062, -122.3321', // Coordenadas de Seattle
     price: 180,
+    amenities: ['wifi', 'parking', 'air conditioned'],
   },
   {
     user_id: 10,
@@ -130,6 +137,7 @@ export const houses = [
     guestCount: 2,
     locationValue: '52.5200, 13.4050', // Coordenadas de Berlín
     price: 100,
+    amenities: ['wifi', 'parking', 'air conditioned'],
   },
   {
     user_id: 11,
@@ -143,6 +151,7 @@ export const houses = [
     guestCount: 6,
     locationValue: '-34.6037, -58.3816', // Coordenadas de Buenos Aires
     price: 190,
+    amenities: ['wifi', 'parking', 'air conditioned'],
   },
   {
     user_id: 12,

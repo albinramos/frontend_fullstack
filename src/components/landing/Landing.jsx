@@ -8,7 +8,6 @@ const Landing = () => {
     minHeight: '100vh'
   };
 
-
   const navigate = useNavigate();
 
   const [randomHouses, setRandomHouses] = useState([]);
@@ -17,13 +16,17 @@ const Landing = () => {
   const [arrivalDate, setArrivalDate] = useState('');
   const [departDate, setDepartDate] = useState('');
   const [guests, setGuests] = useState(1);
+  const [lat, setLat] = useState(''); 
+  const [lon, setLon] = useState('');
 
 
-  const handleCitySelection = (selectedCity, selectedCountry) => {
+  const handleCitySelection = (selectedCity, selectedCountry, selectedLat, selectedLon) => {
     setCity(selectedCity);
     setCountry(selectedCountry);
+    setLat(selectedLat);
+    setLon(selectedLon);
   };
-  
+
   const getCityName = async (lat, lon) => {
     try {
       const apiKey = '19ad8885f90bc4592b407518f2859bf2';
@@ -65,19 +68,22 @@ const Landing = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    searchHouses(city, arrivalDate, departDate, guests, country);
-    navigate('/search', { state: { city, arrivalDate, departDate, guests, country } });
+    searchHouses(city, arrivalDate, departDate, guests, country, lat, lon);
+    navigate('/search', { state: { city, arrivalDate, departDate, guests, country, lat, lon } });
     console.log('City1:', city);
     console.log('Country1:', country);
+    console.log('lat:', lat);
+    console.log('lon:', lon);
   };
 
-  const searchHouses = (city, arrivalDate, departDate, guests, country) => {
-    console.log('Búsqueda de casas con los siguientes criterios:');
+  const searchHouses = (city, arrivalDate, departDate, guests, country, lat, lon) => {
     console.log('City:', city);
     console.log('Country:', country);
-    console.log('Arrival Date:', arrivalDate);
-    console.log('Depart Date:', departDate);
-    console.log('Guests:', guests);
+    //console.log('Arrival Date:', arrivalDate);
+    //console.log('Depart Date:', departDate);
+    //console.log('Guests:', guests);
+    console.log('lat:', lat);
+    console.log('lon:', lon);
   };
 
   return (
