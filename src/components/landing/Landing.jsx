@@ -3,6 +3,9 @@ import { houses } from '../../Data';
 import './landing.css';
 import { useNavigate, Link } from 'react-router-dom'; 
 import CityAutosuggest from './../cityAutosuggest'
+import { fetchCityData } from '../../apiUtils';
+
+
 const Landing = () => {
   const pageStyles = {
     minHeight: '100vh'
@@ -66,14 +69,15 @@ const Landing = () => {
     getRandomHouses();
   }, []);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    searchHouses(city, arrivalDate, departDate, guests, country, lat, lon);
-    navigate('/search', { state: { city, arrivalDate, departDate, guests, country, lat, lon } });
-    console.log('City1:', city);
-    console.log('Country1:', country);
-    console.log('lat:', lat);
-    console.log('lon:', lon);
+
+    // Fetch city data based on the selected city from cities500.json
+    const cityData = await fetchCityData(city);
+
+    // Navigate to the search page with the form data and cityData
+    navigate('/search', { state: { city, arrivalDate, departDate, guests, country, cityData } });
+    console.log('cityData:', cityData);
   };
 
   const searchHouses = (city, arrivalDate, departDate, guests, country, lat, lon) => {

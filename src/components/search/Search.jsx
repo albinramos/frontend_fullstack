@@ -7,9 +7,10 @@ import './search.css';
 
 const Search = () => {  
   const location = useLocation();
-  const { city, arrivalDate, departDate, guests, country } = location.state || {};
+  const { city, arrivalDate, departDate, guests, country, cityData } = location.state || {};
   //console.log('City:', city);
   //console.log('Country:', country);
+  console.log('cityData:', cityData);
 
   const pageStyles = {
     minHeight: '100vh',
@@ -27,10 +28,12 @@ const Search = () => {
         <p>Guests: {guests}</p>
         {}
         <div className="map">
-          <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={true}>
+          <MapContainer center={[cityData.lat, cityData.lon]} zoom={13} scrollWheelZoom={true}>
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
+          <Marker position={[cityData.lat, cityData.lon]}>
+          </Marker>
           </MapContainer>
         </div>
       </section>
