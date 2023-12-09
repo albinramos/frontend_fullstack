@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import './search.css';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const Search = () => {
   const [houses, setHouses] = useState([]);
+  const [selectedHouse, setSelectedHouse] = useState(null); // Nuevo estado para la casa seleccionada
   const location = useLocation();
-  const { city, arrivalDate, departDate, guests, country, cityData } = location.state || {};
-  console.log('cityData:', cityData);
+  const { cityData } = location.state || {};
 
   const pageStyles = {
     minHeight: '100vh',
@@ -37,7 +40,6 @@ const Search = () => {
     });
 
     setHouses(filteredHouses);
-    console.log('filteredHouses:', filteredHouses);
   };
 
   // Función para calcular la distancia entre dos puntos en la Tierra (fórmula de Haversine)
@@ -65,42 +67,92 @@ const Search = () => {
     }));
   };
 
+  const handleMoreInfoClick = (house) => {
+    setSelectedHouse(house);
+  };
+
+  const resetSelectedHouse = () => {
+    setSelectedHouse(null);
+  };
+
+  const renderHouseDetails = () => {
+    if (!selectedHouse) {
+      return null;
+    }
+  
+  const sliderSettings = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+  };
+
+    return (
+      <div className="more-info__card">
+        <div className='popup__container'>
+          <h3>{selectedHouse.title}</h3>
+          <Slider {...sliderSettings}>
+          {selectedHouse.imageSrc.map((image, index) => (
+            <div key={index}>
+              <img src={image} alt={`House ${index + 1}`} className='slider-img'/>
+            </div>
+          ))}
+        </Slider>
+          <p>Description: {selectedHouse.description}</p>
+          <p>Number of guests: {selectedHouse.guestCount}</p>
+          <p>Category: {selectedHouse.category}</p>
+          <p>Nº of rooms: {selectedHouse.roomCount} </p>
+          <p>Nº of bathrooms: {selectedHouse.bathroomCount}</p>
+          {selectedHouse.amenities.map((amenity, index) => (
+        <p key={index} style={{ marginBottom: '10px' }}>{amenity}</p>
+      ))}
+          <button onClick={resetSelectedHouse}>Close</button>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div style={pageStyles}>
       <section className="search">
         <h1>Search Results</h1>
-        {/* ... (resto del contenido) */}
         <div className="map">
           <MapContainer center={[cityData.lat, cityData.lon]} zoom={13} scrollWheelZoom={true}>
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             {getGeolocation().map((house, index) => (
-              <Marker key={index} position={[house.lat, house.lon]}></Marker>
+              <Marker key={index} position={[house.lat, house.lon]}>
+              </Marker>
             ))}
+            {renderHouseDetails()} {/* Nuevo llamado a la función para mostrar detalles */}
           </MapContainer>
         </div>
       </section>
       <section className="houses">
         <h2>Houses</h2>
-        <div className="houses__container">
-          {houses.map((house, index) => (
-            <div key={index}>
-              <h2 className="houses__h2-title">{house.title}</h2>
-              <p>City: {house.cityName}</p>
-              <p>Guest Count: {house.guestCount}</p>
-              <div className="houses__photos">
-  {house.imageSrc.length > 0 ? (
-    <img
-      src={house.imageSrc[0]}
-      alt={`House ${index + 1} - Photo 1`}
-    />
-  ) : (
-    <img src="../src/assets/no-image.jpg" alt="No Image" />
-  )}
-</div>
-            </div>
-          ))}
+        <div className="houses__container-main">
+          <div className="houses__container">
+            {houses.map((house, index) => (
+              <div key={index} className="house__card">
+                <h2 className="houses__h2-title">{house.title}</h2>
+                <p>City: {cityData.name}</p>
+                <p>Guest Count: {house.guestCount}</p>
+                <div className="houses__photos">
+                  {house.imageSrc.length > 0 ? (
+                    <img className="houses__img" src={house.imageSrc[0]} alt={`House ${index + 1} - Photo 1`} />
+                  ) : (
+                    <img src="../src/assets/no-image.jpg" alt="No Image" />
+                  )}
+                </div>
+                <button className="houses__button" onClick={() => handleMoreInfoClick(house)}>
+                  More Info
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
+      {renderHouseDetails()}
     </div>
   );
 };
