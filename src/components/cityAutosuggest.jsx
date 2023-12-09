@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import Autosuggest from 'react-autosuggest';
-import citiesData from '../assets/cities500.json'
 
 const CityAutosuggest = ({ onSelectCity }) => {
   const [value, setValue] = useState('');
   const [suggestions, setSuggestions] = useState([]);
 
-  const onSuggestionsFetchRequested = ({ value }) => {
-    const inputValueLowerCase = value.trim().toLowerCase();
-    const filteredSuggestions = citiesData.filter(city =>
-      city.name.toLowerCase().includes(inputValueLowerCase)
-    );
-    setSuggestions(filteredSuggestions);
+  const onSuggestionsFetchRequested = async ({ value }) => {
+    const endpoint = `http://backend.com/cities?query=${value}`;
+    const response = await fetch(endpoint);
+    const data =  await response.json();
+    setSuggestions(data.cities);
   };
 
   const onSuggestionsClearRequested = () => {
@@ -41,6 +39,8 @@ const CityAutosuggest = ({ onSelectCity }) => {
     value,
     onChange,
   };
+
+  console.log(suggestions)
 
   return (
     <Autosuggest

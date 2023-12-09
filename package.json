@@ -28,6 +28,10 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.4",
+    "msw": "^2.0.10",
     "vite": "^5.0.0"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }

@@ -9,10 +9,11 @@ export const houses = [
     roomCount: 3,
     bathroomCount: 2,
     guestCount: 6,
-    locationValue: '40.7128, -74.0060', // Coordenadas de Nueva York
+    locationValue: '40.7128, -74.0060', 
+    amenities: ['wifi', 'parking', 'air conditioned'],
     price: 200,
-    amenities: ['wifi', 'parking', 'swimming pool'],
-  },
+
+  }, 
   {
     user_id: 2,
     title: 'Casa Rústica en las Montañas',
@@ -181,3 +182,5 @@ export const houses = [
   },
 
 ]
+
+export default houses; 

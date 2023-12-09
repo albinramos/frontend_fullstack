@@ -46,27 +46,16 @@ const Landing = () => {
     }
   };
 
-  const getRandomHouses = async () => {
-    const shuffledHouses = houses.sort(() => 1 - Math.random());
-    const selectedHouses = shuffledHouses.slice(0, 12);
-
-    try {
-      const housesWithCityNames = await Promise.all(
-        selectedHouses.map(async (house) => {
-          const [lat, lon] = house.locationValue.split(',').map(Number);
-          const cityName = await getCityName(lat, lon);
-          return { ...house, cityName };
-        })
-      );
-
-      setRandomHouses(housesWithCityNames);
-    } catch (error) {
-      console.error('Error fetching city names for houses:', error.message);
-    }
-  };
+const getHouses = async () => {
+  const endpoint = 'http://backend.com/houses';
+  const response = await fetch(endpoint);
+  const data = await response.json();
+  console.log('data:', data);
+  setRandomHouses(data.houses);
+}
 
   useEffect(() => {
-    getRandomHouses();
+    getHouses();
   }, []);
 
   const handleSubmit = async (event) => {
@@ -78,16 +67,6 @@ const Landing = () => {
     // Navigate to the search page with the form data and cityData
     navigate('/search', { state: { city, arrivalDate, departDate, guests, country, cityData } });
     console.log('cityData:', cityData);
-  };
-
-  const searchHouses = (city, arrivalDate, departDate, guests, country, lat, lon) => {
-    console.log('City:', city);
-    console.log('Country:', country);
-    //console.log('Arrival Date:', arrivalDate);
-    //console.log('Depart Date:', departDate);
-    //console.log('Guests:', guests);
-    console.log('lat:', lat);
-    console.log('lon:', lon);
   };
 
   return (

@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import './search.css';
 
 
-const Search = () => {  
+const Search = () => { 
+  const [houses, setHouses] = useState([]); 
   const location = useLocation();
   const { city, arrivalDate, departDate, guests, country, cityData } = location.state || {};
   //console.log('City:', city);
@@ -15,6 +16,27 @@ const Search = () => {
   const pageStyles = {
     minHeight: '100vh',
   };
+
+  useEffect(() => {
+    getHouses();
+  }, []);
+
+  const getHouses = async () => {
+    const endpoint = 'http://backend.com/houses';
+    const response = await fetch(endpoint);
+    const data = await response.json();
+    console.log('data:', data);
+    setHouses(data.houses);
+  }
+
+  const getGeolocation = () => {
+    return houses.map((house) => (
+      {
+        lat: house.locationValue.split(',')[0],
+        lon: house.locationValue.split(',')[1]
+      }
+    ))
+  }
 
   return (
     <div style={pageStyles}>
@@ -32,8 +54,10 @@ const Search = () => {
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-          <Marker position={[cityData.lat, cityData.lon]}>
-          </Marker>
+            {getGeolocation().map((house, index) => (
+              <Marker key={index} position={[house.lat, house.lon]}>
+              </Marker>
+            ))}
           </MapContainer>
         </div>
       </section>
