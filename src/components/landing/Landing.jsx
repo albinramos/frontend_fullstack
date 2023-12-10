@@ -77,9 +77,12 @@ const Landing = () => {
         <div className='landing__input'>
           <form className='landing__form' onSubmit={handleSubmit}>
             <CityAutosuggest onSelectCity={handleCitySelection}/>
+            <label for='arrivalDate'>Arrival Date</label>
             <input type='date' placeholder='Arrival Date' className='form__arrival-date' value={arrivalDate} onChange={(e) => setArrivalDate(e.target.value)} />
+            <label for='departureDate'>Departure Date</label>
             <input type="date" placeholder="Depart Date" className='form__depart-date' value={departDate} onChange={(e) => setDepartDate(e.target.value)} />
-            <input type="number" placeholder="Guests" className='form__guests' value={guests} onChange={(e) => setGuests(e.target.value)} />
+            <label for='totalGuests'>Nº of Guests</label>
+            <input type="number" className='form__guests' value={guests} onChange={(e) => setGuests(e.target.value)} />
             <button type="submit">Submit</button>
           </form>
         </div>
@@ -101,7 +104,7 @@ const Landing = () => {
               <div key={index} className='landing__house-card'>
                 <h2 className='landing__h2-title'>{house.title}</h2>
                 <p className='landing__p-card'>City: {house.cityName}</p>
-                <p className='landing__p-card-last'>Guest Count: {house.guestCount}</p>
+                <p className='landing__p-card-last'>Total Guests Number: {house.guestCount}</p>
                 {imageElement}
               </div>
             );
