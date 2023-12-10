@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { houses } from '../../Data';
 import './landing.css';
-import { useNavigate, Link } from 'react-router-dom'; 
-import CityAutosuggest from './../cityAutosuggest'
+import { useNavigate } from 'react-router-dom'; 
+import CityAutosuggest from './../cityAutosuggest';
 import { fetchCityData } from '../../apiUtils';
-
 
 const Landing = () => {
   const pageStyles = {
@@ -15,19 +13,12 @@ const Landing = () => {
 
   const [randomHouses, setRandomHouses] = useState([]);
   const [city, setCity] = useState('');
-  const [country, setCountry] = useState('');
   const [arrivalDate, setArrivalDate] = useState('');
   const [departDate, setDepartDate] = useState('');
   const [guests, setGuests] = useState(1);
-  const [lat, setLat] = useState(''); 
-  const [lon, setLon] = useState('');
 
-
-  const handleCitySelection = (selectedCity, selectedCountry, selectedLat, selectedLon) => {
+  const handleCitySelection = (selectedCity, _, selectedLat, selectedLon) => {
     setCity(selectedCity);
-    setCountry(selectedCountry);
-    setLat(selectedLat);
-    setLon(selectedLon);
   };
 
   const getCityName = async (lat, lon) => {
@@ -35,24 +26,35 @@ const Landing = () => {
       const apiKey = '19ad8885f90bc4592b407518f2859bf2';
       const response = await fetch(`http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${apiKey}`);
       const data = await response.json();
-      const cityName = Array.isArray(data) && data.length > 0 ? data[0] : null;
+      const cityName = Array.isArray(data) && data.length > 0 ? data[0].name : null;
       console.log('data:', data);
       console.log('cityName:', cityName);
-      return cityName.name;
-    } 
-    catch (error) {
+      return cityName;
+    } catch (error) {
       console.error('Error fetching city name:', error.message);
       return '';
     }
   };
 
-const getHouses = async () => {
-  const endpoint = 'http://backend.com/houses';
-  const response = await fetch(endpoint);
-  const data = await response.json();
-  console.log('data:', data);
-  setRandomHouses(data.houses);
-}
+  const getHouses = async () => {
+    try {
+      const endpoint = 'http://backend.com/houses';
+      const response = await fetch(endpoint);
+      const data = await response.json();
+      console.log('data:', data);
+
+      // Obtener el cityName para cada casa y actualizar el estado
+      const housesWithCityName = await Promise.all(data.houses.map(async (house) => {
+        const [lat, lon] = house.locationValue.split(',').map(coord => parseFloat(coord.trim()));
+        const cityName = await getCityName(lat, lon);
+        return { ...house, cityName };
+      }));
+
+      setRandomHouses(housesWithCityName);
+    } catch (error) {
+      console.error('Error fetching houses:', error.message);
+    }
+  };
 
   useEffect(() => {
     getHouses();
@@ -65,8 +67,7 @@ const getHouses = async () => {
     const cityData = await fetchCityData(city);
 
     // Navigate to the search page with the form data and cityData
-    navigate('/search', { state: { city, arrivalDate, departDate, guests, country, cityData } });
-    console.log('cityData:', cityData);
+    navigate('/search', { state: { city, arrivalDate, departDate, guests, cityData } });
   };
 
   return (

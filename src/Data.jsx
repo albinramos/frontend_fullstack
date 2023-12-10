@@ -219,7 +219,7 @@ export const houses = [
     guestCount: 8,
     locationValue: '42.5077900, 1.5210900', 
     price: 350,
-    amenities: ['Wifi', 'Parking', 'Air Conditioned'],
+    amenities: ['Wifi', 'Parking', 'Air Conditioned', 'Elevator'],
   },
   {
     user_id: 16,
@@ -233,7 +233,7 @@ export const houses = [
     guestCount: 4,
     locationValue: '42.50317, 1.51313', 
     price: 350,
-    amenities: ['Wifi', 'Parking', 'Air Conditioned'],
+    amenities: ['Wifi', 'Parking', 'Air Conditioned', 'Elevator'],
   },
 
 

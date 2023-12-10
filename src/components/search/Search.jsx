@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import AmenityIcon from '../AmenityIcon';
 import 'leaflet/dist/leaflet.css';
 import './search.css';
 import Slider from 'react-slick';
@@ -44,6 +45,12 @@ const Search = () => {
 
     setHouses(filteredHouses);
   };
+
+  const renderAmenities = () => {
+    if (!selectedHouse || !selectedHouse.amenities || selectedHouse.amenities.length === 0) {
+      return null;
+    }
+  }
 
   // Función para calcular la distancia entre dos puntos en la Tierra (fórmula de Haversine)
   const getDistance = (lat1, lon1, lat2, lon2) => {
@@ -108,12 +115,19 @@ const Search = () => {
           <p><strong>Nº of rooms:</strong> {selectedHouse.roomCount} </p>
           <p><strong>Nº of bathrooms:</strong> {selectedHouse.bathroomCount}</p>
           <div className='amenities__block'>
-            <p><strong>Amenities:</strong></p>
-            {selectedHouse.amenities.map((amenity, index) => (
-            <p key={index} style={{ marginBottom: '10px' }}>- {amenity}</p>
-            ))}
+        <p>
+          <strong>Amenities:</strong>
+        </p>
+        {selectedHouse.amenities.map((amenity, index) => (
+          <p key={index} style={{ marginBottom: '10px' }}>
+            - <AmenityIcon amenity={amenity} /> {amenity}
+          </p>
+        ))}
+      </div>
+          <div className='search__buttons'>
+            <button className='reservation__button'>Reservation</button>
+            <button onClick={resetSelectedHouse} className='close__button'>Close</button>
           </div>
-          <button onClick={resetSelectedHouse}>Close</button>
         </div>
       </div>
     );
