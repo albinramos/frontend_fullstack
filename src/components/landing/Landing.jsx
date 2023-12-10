@@ -97,10 +97,10 @@ const getHouses = async () => {
             }
 
             return (
-              <div key={index}>
+              <div key={index} className='landing__house-card'>
                 <h2 className='landing__h2-title'>{house.title}</h2>
-                <p>City: {house.cityName}</p>
-                <p>Guest Count: {house.guestCount}</p>
+                <p className='landing__p-card'>City: {house.cityName}</p>
+                <p className='landing__p-card-last'>Guest Count: {house.guestCount}</p>
                 {imageElement}
               </div>
             );

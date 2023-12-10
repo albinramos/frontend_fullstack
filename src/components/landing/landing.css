@@ -1,16 +1,24 @@
 .landing__container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between; /* Ajusta según tus necesidades de alineación horizontal */
+  flex-direction: column;
+  justify-content: center; /* Ajusta según tus necesidades de alineación horizontal */
   padding: 10px;
 }
 
-.landing__container > div {
-  width: 18%; /* Ajusta el ancho según tus necesidades */
-  margin-bottom: 20px; /* Ajusta según tus necesidades de espaciado vertical */
-  background-color: blanchedalmond;
-  border-radius: 10px;
-  padding: 20px;
+.landing__h2-title{
+  text-align: center;
+  font-size: var(--h2-font-size);
+
+}
+
+.landing__p-card{
+  text-align: center;
+  font-size: var(--p-font-size);
+  margin: 10px;
+}
+
+.landing__p-card-last{
+  margin-bottom: 20px;
 }
 
 .landing__img {
@@ -18,6 +26,7 @@
   height: 150px;
   object-fit: cover;
   border-radius: 10px;
+  margin-bottom: 20px;
 }
 
 .landing__input{
@@ -26,6 +35,18 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+
+.landing__house-card{
+  display: flex;
+  flex-direction: column;
+  width: 80%; /* Ajusta el ancho según tus necesidades */
+  margin-bottom: 20px; /* Ajusta según tus necesidades de espaciado vertical */
+  background-color: blanchedalmond;
+  border-radius: 10px;
+  padding: 20px;
+  margin: auto;
+  margin-bottom: 40px;
 }
 
 
@@ -42,5 +63,28 @@
 
 .landing__form{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 768px){
+
+  .landing__container {
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+  }
+
+  .landing__house-card{
+    display: flex;
+    flex-direction: column;
+    width: 30%; /* Ajusta el ancho según tus necesidades */
+    margin-bottom: 20px; /* Ajusta según tus necesidades de espaciado vertical */
+    background-color: blanchedalmond;
+    border-radius: 10px;
+    padding: 20px;
+    margin: auto;
+    margin-bottom: 40px;
+  }
+
+
 }

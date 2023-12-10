@@ -6,6 +6,9 @@ import './search.css';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { FaWifi,FaSwimmingPool, FaParking } from "react-icons/fa";
+import { LuAirVent } from "react-icons/lu";
+import { FaElevator } from "react-icons/fa6";
 
 const Search = () => {
   const [houses, setHouses] = useState([]);
@@ -99,14 +102,17 @@ const Search = () => {
             </div>
           ))}
         </Slider>
-          <p>Description: {selectedHouse.description}</p>
-          <p>Number of guests: {selectedHouse.guestCount}</p>
-          <p>Category: {selectedHouse.category}</p>
-          <p>Nº of rooms: {selectedHouse.roomCount} </p>
-          <p>Nº of bathrooms: {selectedHouse.bathroomCount}</p>
-          {selectedHouse.amenities.map((amenity, index) => (
-        <p key={index} style={{ marginBottom: '10px' }}>{amenity}</p>
-      ))}
+          <p><strong>Description:</strong> {selectedHouse.description}</p>
+          <p><strong>Number of guests:</strong> {selectedHouse.guestCount}</p>
+          <p><strong>Category:</strong> {selectedHouse.category}</p>
+          <p><strong>Nº of rooms:</strong> {selectedHouse.roomCount} </p>
+          <p><strong>Nº of bathrooms:</strong> {selectedHouse.bathroomCount}</p>
+          <div className='amenities__block'>
+            <p><strong>Amenities:</strong></p>
+            {selectedHouse.amenities.map((amenity, index) => (
+            <p key={index} style={{ marginBottom: '10px' }}>- {amenity}</p>
+            ))}
+          </div>
           <button onClick={resetSelectedHouse}>Close</button>
         </div>
       </div>
@@ -116,7 +122,7 @@ const Search = () => {
   return (
     <div style={pageStyles}>
       <section className="search">
-        <h1>Search Results</h1>
+        <h1 className='search__h1'>Search Results</h1>
         <div className="map">
           <MapContainer center={[cityData.lat, cityData.lon]} zoom={13} scrollWheelZoom={true}>
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />

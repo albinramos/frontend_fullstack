@@ -110,7 +110,7 @@ export const houses = [
     guestCount: 6,
     locationValue: '25.7617, -80.1918', // Coordenadas de Miami
     price: 220,
-    amenities: ['wifi', 'parking', 'air conditioned'],
+    amenities: ['Wifi', 'Parking', 'Air Conditioned'],
   },
   {
     user_id: 9,
@@ -205,7 +205,7 @@ export const houses = [
     guestCount: 8,
     locationValue: '42.5427700, 1.7336100', 
     price: 350,
-    amenities: ['wifi', 'parking', 'air conditioned'],
+    amenities: ['Wifi', 'Parking', 'Air Conditioned'],
   },
   {
     user_id: 15,
@@ -219,7 +219,7 @@ export const houses = [
     guestCount: 8,
     locationValue: '42.5077900, 1.5210900', 
     price: 350,
-    amenities: ['wifi', 'parking', 'air conditioned'],
+    amenities: ['Wifi', 'Parking', 'Air Conditioned'],
   },
   {
     user_id: 16,
@@ -233,7 +233,7 @@ export const houses = [
     guestCount: 4,
     locationValue: '42.50317, 1.51313', 
     price: 350,
-    amenities: ['wifi', 'parking', 'air conditioned'],
+    amenities: ['Wifi', 'Parking', 'Air Conditioned'],
   },
 
 
