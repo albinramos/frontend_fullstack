@@ -11,7 +11,7 @@ import { FaWifi,FaSwimmingPool, FaParking } from "react-icons/fa";
 import { LuAirVent } from "react-icons/lu";
 import { FaElevator } from "react-icons/fa6";
 
-const Search = () => {
+const SearchResults = () => {
   const [houses, setHouses] = useState([]);
   const [selectedHouse, setSelectedHouse] = useState(null); // Nuevo estado para la casa seleccionada
   const location = useLocation();
@@ -26,7 +26,7 @@ const Search = () => {
   }, []);
 
   const getHouses = async () => {
-    const endpoint = 'http://backend.com/houses';
+    const endpoint = 'http://localhost:3666/house';
     const response = await fetch(endpoint);
     const data = await response.json();
     console.log('data:', data);
@@ -177,4 +177,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default SearchResults;

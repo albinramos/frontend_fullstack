@@ -38,7 +38,7 @@ const Landing = () => {
 
   const getHouses = async () => {
     try {
-      const endpoint = 'http://backend.com/houses';
+      const endpoint = 'http://localhost:3666/house';
       const response = await fetch(endpoint);
       const data = await response.json();
       console.log('data:', data);
@@ -66,8 +66,9 @@ const Landing = () => {
     // Fetch city data based on the selected city from cities500.json
     const cityData = await fetchCityData(city);
 
+    const citySlug = city.toLowerCase().replace(/\s/g, '-');
     // Navigate to the search page with the form data and cityData
-    navigate('/search', { state: { city, arrivalDate, departDate, guests, cityData } });
+    navigate(`/cities/${citySlug}`, { state: { city, arrivalDate, departDate, guests, cityData } });
   };
 
   return (

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import 'react-international-phone/style.css';
 import './login.css';
+import { Navigate } from 'react-router-dom';
 
 const Login = () => {
   const pageStyles = {
@@ -8,6 +9,7 @@ const Login = () => {
   };
 
 const [isRegister, setIsRegister] = useState(false);
+const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 const loginHandler = async (e) => {
   e.preventDefault();
@@ -37,7 +39,7 @@ const loginHandler = async (e) => {
     alert(data.error);
     return;
   }
-  alert('Login successful');
+  setIsLoggedIn(true);
 }
 
 const submitHandler = async (e) => {
@@ -49,10 +51,9 @@ const submitHandler = async (e) => {
   }
 }
 
-
-    
-
-
+if(isLoggedIn){
+  return <Navigate to='/landing'/>
+}
   return (
     <div style={pageStyles}>
     <section className="login">

@@ -6,7 +6,7 @@ const CityAutosuggest = ({ onSelectCity }) => {
   const [suggestions, setSuggestions] = useState([]);
 
   const onSuggestionsFetchRequested = async ({ value }) => {
-    const endpoint = `http://backend.com/cities?query=${value}`;
+    const endpoint = `http://localhost:3666/landing/cities?value=${value}`;
     const response = await fetch(endpoint);
     const data =  await response.json();
     setSuggestions(data.cities);
