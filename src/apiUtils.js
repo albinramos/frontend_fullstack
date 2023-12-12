@@ -4,11 +4,12 @@ export const fetchCityData = async (selectedCity) => {
     const citiesData = await response.json();
 
     // Find the selected city in the array
-    const selectedCityData = citiesData.find(city => city.name === selectedCity);
+    const selectedCityData = citiesData.find((city) => city.name === selectedCity);
 
     return selectedCityData || null;
   } catch (error) {
-    console.error('Error fetching city data:', error.message);
     return null;
   }
 };
+
+export default fetchCityData;
