@@ -6,6 +6,50 @@ import './register.css';
 
 const Register = () => {
 
+  const [isRegister, setIsRegister] = useState(false);
+
+  const registerHandler = async (e) => {
+    e.preventDefault();
+    try{
+      const firstName = e.target.elements.firstName.value;
+      const lastName = e.target.elements.lastName.value;
+      const email = e.target.elements.email.value;
+      const phoneNumber = phone;
+      const image = e.target.elements.image.value;
+      const password = e.target.elements.password.value;
+      const confirmPassword = e.target.elements.confirmPassword.value;
+      const body = {
+        firstName,
+        lastName,
+        email,
+        phoneNumber,
+        image,
+        password,
+        confirmPassword,
+      };
+      console.log(body);
+      const result = await fetch('http://localhost:3666/user', 
+      {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body),
+      })
+      const data= await result.json();
+      console.log(data);
+      if(data.error){
+        alert(data.error);
+        return;
+      }
+      alert('Register successful');
+    }
+    catch(error){
+      console.log('Error registering: ', error.message);
+    }
+  }
+
   const [phone, setPhone] = useState('');
 
   const pageStyles = {
@@ -16,10 +60,10 @@ const Register = () => {
     <div style={pageStyles}>
     <section className="register">
     <h1>Register</h1>
-    <form className='register__form'>
-    <input type='text' placeholder='First Name'className='form__name'/>
-    <input type='text' placeholder='Last Name'className='form__last'/>
-    <input type="email" placeholder="Email" className='form__email'/>
+    <form className='register__form' onSubmit={registerHandler}>
+    <input type='text' placeholder='First Name'className='form__name'name='firstName'/>
+    <input type='text' placeholder='Last Name'className='form__last'name='lastName'/>
+    <input type="email" placeholder="Email" className='form__email'name='email'/>
   <div className='form__phone'>
     <PhoneInput
       defaultCountry="es"
@@ -27,30 +71,15 @@ const Register = () => {
       onChange={(phone) => setPhone(phone)}
     />
   </div>
-    <input type="password" placeholder="Password" className='form__password'/>
-    <input type="password" placeholder="Confirm Password" className='form__password'/>
+    <input type="password" placeholder="Password" className='form__password'name='password'/>
+    <input type="password" placeholder="Confirm Password" className='form__password'name='confirmPassword'/>
     <p className='register__photo'>Select your profile photo:</p>
-    <input type='file' className='form__file'/>
+    <input type='file' className='form__file'name='image'/>
     <button type="submit">Register</button>
   </form>  
   </section>
   </div>
-
   )
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 export default Register
