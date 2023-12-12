@@ -17,23 +17,8 @@ const Landing = () => {
   const [departDate, setDepartDate] = useState('');
   const [guests, setGuests] = useState(1);
 
-  const handleCitySelection = (selectedCity, _, selectedLat, selectedLon) => {
-    setCity(selectedCity);
-  };
-
-  const getCityName = async (lat, lon) => {
-    try {
-      const apiKey = '19ad8885f90bc4592b407518f2859bf2';
-      const response = await fetch(`http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&appid=${apiKey}`);
-      const data = await response.json();
-      const cityName = Array.isArray(data) && data.length > 0 ? data[0].name : null;
-      console.log('data:', data);
-      console.log('cityName:', cityName);
-      return cityName;
-    } catch (error) {
-      console.error('Error fetching city name:', error.message);
-      return '';
-    }
+  const handleCitySelection = (suggestion) => {
+    setCity(suggestion);
   };
 
   const getHouses = async () => {
@@ -45,8 +30,7 @@ const Landing = () => {
 
       // Obtener el cityName para cada casa y actualizar el estado
       const housesWithCityName = await Promise.all(data.houses.map(async (house) => {
-        const [lat, lon] = house.locationValue.split(',').map(coord => parseFloat(coord.trim()));
-        const cityName = await getCityName(lat, lon);
+        const cityName = house.locationValue.split(', ')[2];
         return { ...house, cityName };
       }));
 
@@ -62,13 +46,10 @@ const Landing = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    // Fetch city data based on the selected city from cities500.json
-    const cityData = await fetchCityData(city);
-
-    const citySlug = city.toLowerCase().replace(/\s/g, '-');
+    const cityName = city.name;
+    const citySlug = city.name.toLowerCase().replace(/\s/g, '-');
     // Navigate to the search page with the form data and cityData
-    navigate(`/cities/${citySlug}`, { state: { city, arrivalDate, departDate, guests, cityData } });
+    navigate(`/cities/${citySlug}`, { state: { cityName, arrivalDate, departDate, guests, city } });
   };
 
   return (

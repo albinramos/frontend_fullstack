@@ -4,6 +4,7 @@ module.exports = {
     es2021: true,
   },
   extends: 'airbnb',
+  plugins: ["prettier"],
   overrides: [
     {
       env: {
@@ -22,6 +23,6 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    'no-extra-semi': 0,
+    'prettier/prettier': 'error',
   },
 };

@@ -15,7 +15,6 @@ const SearchResults = () => {
   const [houses, setHouses] = useState([]);
   const [selectedHouse, setSelectedHouse] = useState(null); // Nuevo estado para la casa seleccionada
   const location = useLocation();
-  const { cityData } = location.state || {};
 
   const pageStyles = {
     minHeight: '100vh',
@@ -35,6 +34,7 @@ const SearchResults = () => {
     const filteredHouses = data.houses.filter((house) => {
       const houseLat = parseFloat(house.locationValue.split(',')[0]);
       const houseLon = parseFloat(house.locationValue.split(',')[1]);
+      const cityData = location.state.city;
 
       // Calcular la distancia entre la casa y la ciudad objetivo
       const distance = getDistance(cityData.lat, cityData.lon, houseLat, houseLon);
@@ -138,7 +138,7 @@ const SearchResults = () => {
       <section className="search">
         <h1 className='search__h1'>Search Results</h1>
         <div className="map">
-          <MapContainer center={[cityData.lat, cityData.lon]} zoom={13} scrollWheelZoom={true}>
+          <MapContainer center={[location.state.city.lat, location.state.city.lon]} zoom={13} scrollWheelZoom={true}>
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             {getGeolocation().map((house, index) => (
               <Marker key={index} position={[house.lat, house.lon]}>
@@ -155,7 +155,7 @@ const SearchResults = () => {
             {houses.map((house, index) => (
               <div key={index} className="house__card">
                 <h2 className="houses__h2-title">{house.title}</h2>
-                <p>City: {cityData.name}</p>
+                <p>City: {location.state.city.name}</p>
                 <p>Guest Count: {house.guestCount}</p>
                 <div className="houses__photos">
                   {house.imageSrc.length > 0 ? (
