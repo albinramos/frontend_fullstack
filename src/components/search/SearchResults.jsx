@@ -2,18 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import AmenityIcon from '../AmenityIcon';
+import { FaWifi, FaSwimmingPool, FaParking } from 'react-icons/fa';
+import { LuAirVent } from 'react-icons/lu';
+import { FaElevator } from 'react-icons/fa6';
 import 'leaflet/dist/leaflet.css';
 import './search.css';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { FaWifi,FaSwimmingPool, FaParking } from "react-icons/fa";
-import { LuAirVent } from "react-icons/lu";
-import { FaElevator } from "react-icons/fa6";
+
 
 const SearchResults = () => {
   const [houses, setHouses] = useState([]);
-  const [selectedHouse, setSelectedHouse] = useState(null); // Nuevo estado para la casa seleccionada
+  const [selectedHouse, setSelectedHouse] = useState(null);
   const location = useLocation();
 
   const pageStyles = {
@@ -48,6 +49,7 @@ const SearchResults = () => {
 
   const renderAmenities = () => {
     if (!selectedHouse || !selectedHouse.amenities || selectedHouse.amenities.length === 0) {
+      console.log(renderAmenities);
       return null;
     }
   }
@@ -84,6 +86,7 @@ const SearchResults = () => {
   const resetSelectedHouse = () => {
     setSelectedHouse(null);
   };
+  
 
   const renderHouseDetails = () => {
     if (!selectedHouse) {
@@ -115,15 +118,15 @@ const SearchResults = () => {
           <p><strong>Nº of rooms:</strong> {selectedHouse.roomCount} </p>
           <p><strong>Nº of bathrooms:</strong> {selectedHouse.bathroomCount}</p>
           <div className='amenities__block'>
-        <p>
-          <strong>Amenities:</strong>
-        </p>
-        {selectedHouse.amenities.map((amenity, index) => (
-          <p key={index} style={{ marginBottom: '10px' }}>
-            - <AmenityIcon amenity={amenity} /> {amenity}
-          </p>
-        ))}
-      </div>
+            <p>
+              <strong>Amenities:</strong>
+            </p>
+            {selectedHouse.amenities.map((amenity, index) => (
+              <p key={index} style={{ marginBottom: '10px' }}>
+                - <AmenityIcon amenity={amenity} /> {amenity}
+              </p>
+            ))}
+          </div>
           <div className='search__buttons'>
             <button className='reservation__button'>Reservation</button>
             <button onClick={resetSelectedHouse} className='close__button'>Close</button>

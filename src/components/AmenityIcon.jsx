@@ -5,17 +5,16 @@ import { FaElevator } from 'react-icons/fa6';
 
 const AmenityIcon = ({ amenity }) => {
   switch (amenity) {
-    case 'Wifi':
+    case 'wifi':
       return <FaWifi />;
-    case 'Swimming Pool':
+    case 'swimming Pool':
       return <FaSwimmingPool />;
-    case 'Parking':
+    case 'parking':
       return <FaParking />;
-    case 'Air Conditioned':
+    case 'air Conditioned':
       return <LuAirVent />;
-    case 'Elevator':  
+    case 'elevator':  
       return <FaElevator />;
-    // Agrega más casos según las amenities que tengas
     default:
       return null;
   }
