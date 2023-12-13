@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import AmenityIcon from '../AmenityIcon';
-import { FaWifi, FaSwimmingPool, FaParking } from 'react-icons/fa';
-import { LuAirVent } from 'react-icons/lu';
-import { FaElevator } from 'react-icons/fa6';
+import { useNavigate } from 'react-router-dom'; 
 import 'leaflet/dist/leaflet.css';
 import './search.css';
-import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
@@ -16,6 +12,14 @@ const SearchResults = () => {
   const [houses, setHouses] = useState([]);
   const [selectedHouse, setSelectedHouse] = useState(null);
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleMoreInfoClick = (house) => {
+    setSelectedHouse(house);
+    // Utiliza navigate para redirigir a HouseDetails y pasar la información en state
+    navigate(`/housedetails/${house.id}`, { state: { selectedHouse: house } });
+  };
+
 
   const pageStyles = {
     minHeight: '100vh',
@@ -79,13 +83,10 @@ const SearchResults = () => {
     }));
   };
 
-  const handleMoreInfoClick = (house) => {
+/*   const handleMoreInfoClick = (house) => {
     setSelectedHouse(house);
-  };
+  }; */
 
-  const resetSelectedHouse = () => {
-    setSelectedHouse(null);
-  };
   
 
   const renderHouseDetails = () => {
@@ -93,47 +94,6 @@ const SearchResults = () => {
       return null;
     }
   
-  const sliderSettings = {
-      dots: false,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-  };
-
-    return (
-      <div className="more-info__card">
-        <div className='popup__container'>
-          <h3>{selectedHouse.title}</h3>
-          <Slider {...sliderSettings}>
-          {selectedHouse.imageSrc.map((image, index) => (
-            <div key={index}>
-              <img src={image} alt={`House ${index + 1}`} className='slider-img'/>
-            </div>
-          ))}
-        </Slider>
-          <p><strong>Description:</strong> {selectedHouse.description}</p>
-          <p><strong>Number of guests:</strong> {selectedHouse.guestCount}</p>
-          <p><strong>Category:</strong> {selectedHouse.category}</p>
-          <p><strong>Nº of rooms:</strong> {selectedHouse.roomCount} </p>
-          <p><strong>Nº of bathrooms:</strong> {selectedHouse.bathroomCount}</p>
-          <div className='amenities__block'>
-            <p>
-              <strong>Amenities:</strong>
-            </p>
-            {selectedHouse.amenities.map((amenity, index) => (
-              <p key={index} style={{ marginBottom: '10px' }}>
-                - <AmenityIcon amenity={amenity} /> {amenity}
-              </p>
-            ))}
-          </div>
-          <div className='search__buttons'>
-            <button className='reservation__button'>Reservation</button>
-            <button onClick={resetSelectedHouse} className='close__button'>Close</button>
-          </div>
-        </div>
-      </div>
-    );
   };
 
   return (

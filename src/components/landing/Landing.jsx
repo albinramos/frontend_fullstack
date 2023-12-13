@@ -52,6 +52,9 @@ const Landing = () => {
     navigate(`/cities/${citySlug}`, { state: { cityName, arrivalDate, departDate, guests, city } });
   };
 
+  
+
+
   return (
     <div style={pageStyles}>
       <section className="landing">

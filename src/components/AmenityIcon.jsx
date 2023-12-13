@@ -1,20 +1,41 @@
 import React from 'react';
-import { FaWifi, FaSwimmingPool, FaParking } from 'react-icons/fa';
+import { FaWifi, FaSwimmingPool, FaParking, FaHotTub } from 'react-icons/fa';
 import { LuAirVent } from 'react-icons/lu';
 import { FaElevator } from 'react-icons/fa6';
+import { MdBalcony, MdFireplace } from "react-icons/md";
+import { FaKitchenSet } from "react-icons/fa6";
+import { BiSolidWasher } from "react-icons/bi";
+import { CgGym } from "react-icons/cg";
+import { GiFlowerPot } from "react-icons/gi";
+
+
 
 const AmenityIcon = ({ amenity }) => {
   switch (amenity) {
     case 'wifi':
       return <FaWifi />;
-    case 'swimming Pool':
+    case 'swimming pool':
       return <FaSwimmingPool />;
     case 'parking':
       return <FaParking />;
-    case 'air Conditioned':
+    case 'air conditioner':
       return <LuAirVent />;
     case 'elevator':  
       return <FaElevator />;
+    case 'terrace':
+      return <MdBalcony />;
+    case 'kitchen':
+      return <FaKitchenSet />;
+    case 'washer':
+      return <BiSolidWasher />;
+    case 'gym':
+      return <CgGym />;
+    case 'fireplace':
+      return <MdFireplace />;
+    case 'sauna':
+      return <FaHotTub />;
+    case 'garden':
+      return <GiFlowerPot />;
     default:
       return null;
   }
