@@ -23,10 +23,12 @@
 
 .landing__img {
   width: 100%;
-  height: 150px;
+  height: 300px;
   object-fit: cover;
-  border-radius: 10px;
+  border-top-right-radius:10px ;
+  border-top-left-radius:10px ;
   margin-bottom: 20px;
+  overflow: hidden;
 }
 
 .landing__input{
@@ -40,11 +42,14 @@
 .landing__house-card{
   display: flex;
   flex-direction: column;
-  width: 80%; /* Ajusta el ancho según tus necesidades */
-  margin-bottom: 20px; /* Ajusta según tus necesidades de espaciado vertical */
-  background-color: blanchedalmond;
+  width: 80%; 
+  margin-bottom: 20px; 
+  border: 0.5px solid #422800;
+  -webkit-box-shadow: 6px 6px 8px 0px rgba(0,0,0,0.25);
+  -moz-box-shadow: 6px 6px 8px 0px rgba(0,0,0,0.25);
+  box-shadow: 6px 6px 8px 0px rgba(0,0,0,0.25);
   border-radius: 10px;
-  padding: 20px;
+  /* padding: 20px; */
   margin: auto;
   margin-bottom: 40px;
 }
@@ -52,7 +57,8 @@
 
 .form__arrival-date,
 .form__depart-date,
-.form__guests{
+.form__guests, 
+.react-autosuggest__input{
   margin: 10px;
   display: flex;
   font-size: 18px;
@@ -61,11 +67,86 @@
   text-align: center;
 }
 
+
+
 .landing__form{
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
+
+
+/* CSS */
+.button-74 {
+  background-color: #fbeee0;
+  border: 2px solid #422800;
+  border-radius: 30px;
+  box-shadow: #422800 4px 4px 0 0;
+  color: #422800;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 45px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 40%;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.landing-submit{
+  background-color: #fbeee0;
+  border: 2px solid #422800;
+  border-radius: 30px;
+  box-shadow: #422800 4px 4px 0 0;
+  color: #422800;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 30px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 60%;
+  margin: auto;
+}
+
+.button-74:hover {
+  background-color: #fff;
+}
+
+.landing-submit:hover {
+  background-color: #fff;
+}
+
+.button-74:active {
+  box-shadow: #422800 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+.landing-submit:active {
+  box-shadow: #422800 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+.map{
+  width: 95%;
+  margin: auto;
+}
+
+
+
+
+
 
 
 @media screen and (min-width: 768px){
@@ -87,6 +168,12 @@
     margin: auto;
     margin-bottom: 40px;
   }
+
+  .button-74 {
+    min-width: 120px;
+    padding: 0 25px;
+  }
+
 
 
 }

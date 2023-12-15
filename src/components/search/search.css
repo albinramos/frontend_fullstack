@@ -53,7 +53,6 @@ body{
 .houses__container-main{
   display: flex;
   flex-direction: row;
-  background-color: burlywood;
   width: 100%;
   justify-content:space-around;
   margin-bottom: 40px;
@@ -63,6 +62,9 @@ body{
 .house__card{
   padding: 20px;
   width: 90%;
+  background-color: #3a87d4dd;
+  border-radius: 10px;
+  margin-bottom: 80px;
 }
 
 .popup__container{
@@ -80,9 +82,6 @@ body{
   margin: auto;
 }
 
-.houses__button{
-  margin-top: 10px;
-}
 
 /* .slick-slide{
   justify-content: center;
@@ -116,13 +115,6 @@ body{
   margin-top: 20px;
 }
 
-.houses__button{
-  width: 100px;
-  border-radius: 10px;
-  margin: auto;
-  margin-top: 20px;
-}
-
 .close__button{
   
   width: 100px;
@@ -130,6 +122,45 @@ body{
   margin: auto;
   margin-top: 20px;
 }
+
+.houses__button{
+  
+  background-color: #fbeee0;
+  border: 2px solid #422800;
+  border-radius: 30px;
+  box-shadow: #422800 4px 4px 0 0;
+  color: #422800;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 30px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 60%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+
+.houses__button:hover {
+  background-color: #fff;
+}
+
+.houses__button:active {
+  box-shadow: #422800 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+.map{
+  width: 95%;
+  margin: auto;
+}
+
 @media screen and (min-width: 768px){
 
   .map{
@@ -189,6 +220,11 @@ body{
     margin-left: 10px;
     width: 150px;
     border-radius: 10px;
+  }
+
+  .button-74 {
+    min-width: 120px;
+    padding: 0 25px;
   }
 
 
