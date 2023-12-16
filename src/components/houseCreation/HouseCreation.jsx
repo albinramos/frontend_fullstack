@@ -6,7 +6,6 @@ const HouseCreation = () => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    imageSrc: [], // Cambiado a un array para manejar múltiples imágenes
     category: "",
     roomCount: "",
     bathroomCount: "",
@@ -16,6 +15,7 @@ const HouseCreation = () => {
     price: "",
     userId: "",
   });
+  const [locationVisible, setLocationVisible] = useState(true);
 
   const handleChanges = (event) => {
     const { name, value } = event.target;
@@ -23,29 +23,67 @@ const HouseCreation = () => {
   };
 
   const handleImageChange = (event) => {
-    // Manejar cambios en las imágenes y actualizar el estado
     const images = Array.from(event.target.files);
     setFormData({ ...formData, imageSrc: images });
   };
 
-  const creationHandler = async (e) => {
-    e.preventDefault();
-    
+  const handleLocationSearch = async () => {
+    const address = formData.locationValue;
+
+    if (!address) {
+      return;
+    }
 
     try {
-      // Crear un objeto FormData para enviar datos de formulario y archivos
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+          address
+        )}`
+      );
+      const data = await response.json();
+
+      if (data && data.length > 0) {
+        const firstResult = data[0];
+        const lat = parseFloat(firstResult.lat);
+        const lon = parseFloat(firstResult.lon);
+
+        setFormData({
+          ...formData,
+          locationValue: `${lat},${lon},${firstResult.display_name}`
+         
+        });
+
+        // Mostrar el campo de entrada después de obtener resultados
+        setLocationVisible(true);
+      } else {
+        console.log("No se encontraron coordenadas para la dirección ingresada.");
+        // Ocultar el campo de entrada si no se encuentran coordenadas
+        setLocationVisible(false);
+      }
+    } catch (error) {
+      console.error("Error al buscar coordenadas:", error.message);
+    }
+  };
+
+  const handleLocationChange = () => {
+    locationValue=
+    setLocationVisible(true);
+  };
+
+  const creationHandler = async (e) => {
+    e.preventDefault();
+
+    try {
       const formDataWithImages = new FormData();
 
-      // Agregar datos de formulario al objeto FormData
       for (const key in formData) {
         formDataWithImages.append(key, formData[key]);
       }
-
-      // Agregar cada archivo al objeto FormData
+if (formData.imageSrc){
       formData.imageSrc.forEach((image, index) => {
-        formDataWithImages.append(`imageSrc_${index}`, image);
+        formDataWithImages.append("foto", image);
       });
-
+    }
       const result = await fetch("http://localhost:3666/house", {
         method: "POST",
         credentials: "include",
@@ -112,13 +150,30 @@ const HouseCreation = () => {
       name="guestCount"
       value={formData.guestCount}
       onChange={handleChanges}/>
-    <label htmlFor="locationValue">Location</label>
-    <input
-      type="text"
-      id="locationValue"
-      name="locationValue"
-      value={formData.locationValue}
-      onChange={handleChanges}/>
+  <label htmlFor="locationValue">
+        Write your property location to obtain the coordinates
+      </label>
+      <div>
+        
+        {locationVisible ? (
+          <input
+            type="text"
+            id="locationValue"
+            name="locationValue"
+            value={formData.locationValue}
+            onChange={handleChanges}
+          />
+        ) : (
+          <div>{formData.locationValue}</div>
+        )}
+        <button type="button" onClick={handleLocationSearch}>
+          Search Location
+        </button>
+        {/* Botón "Change Location" */}
+        <button type="button" onClick={handleLocationChange}>
+          Change Location
+        </button>
+      </div>
     <label htmlFor="amenities">Amenities</label>
     <input
       type="text"
@@ -133,13 +188,14 @@ const HouseCreation = () => {
       name="price"
       value={formData.price}
       onChange={handleChanges}/>
-    <label htmlFor="imageSrc">Image</label>
+    <label htmlFor="foto">Select a photo of your property, maximum 5 photos</label>
       <input
-        type="file"
-        id="imageSrc"
-        name="imageSrc"
-        accept="image/*"
-        multiple
+         type="file"
+         id="foto"
+         name="foto"
+         accept="image/*"
+         multiple
+        
         onChange={handleImageChange}
       />
       <button type="submit">Create House</button>
