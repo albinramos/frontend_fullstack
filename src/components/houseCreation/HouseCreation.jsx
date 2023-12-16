@@ -15,11 +15,18 @@ const HouseCreation = () => {
     price: "",
     userId: "",
   });
-  
+
 
   const handleChanges = (event) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+
+   
+    if (event.target.multiple) {
+      const selectedOptions = Array.from(event.target.selectedOptions, (option) => option.value);
+      setFormData({ ...formData, [name]: selectedOptions });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const handleImageChange = (event) => {
@@ -50,10 +57,10 @@ const HouseCreation = () => {
         setFormData({
           ...formData,
           locationValue: `${lat},${lon},${firstResult.display_name}`
-         
+
         });
 
-       
+
       }
     } catch (error) {
       console.error("Error al buscar coordenadas:", error.message);
@@ -63,9 +70,9 @@ const HouseCreation = () => {
   const handleLocationChange = () => {
     setFormData({
       ...formData,
-      locationValue: "",  
+      locationValue: "",
     });
-   
+
   };
 
   const creationHandler = async (e) => {
@@ -77,11 +84,11 @@ const HouseCreation = () => {
       for (const key in formData) {
         formDataWithImages.append(key, formData[key]);
       }
-if (formData.imageSrc){
-      formData.imageSrc.forEach((image, index) => {
-        formDataWithImages.append("foto", image);
-      });
-    }
+      if (formData.imageSrc) {
+        formData.imageSrc.forEach((image, index) => {
+          formDataWithImages.append("foto", image);
+        });
+      }
       const result = await fetch("http://localhost:3666/house", {
         method: "POST",
         credentials: "include",
@@ -111,88 +118,114 @@ if (formData.imageSrc){
         type="text"
         id="title"
         name="title"
+        required
         value={formData.title}
         onChange={handleChanges}
       />
-    <label htmlFor="description">Description</label>
-    <textarea
-      id="description"
-      name="description"
-      value={formData.description}
-      onChange={handleChanges}/>
-    <label htmlFor="category">Category</label>
-    <input
-      type="text"
+      <label htmlFor="description">Description</label>
+      <textarea
+        id="description"
+        name="description"
+        value={formData.description}
+        onChange={handleChanges} />
+      <label htmlFor="category">Category</label>
+    <select
       id="category"
       name="category"
       value={formData.category}
-      onChange={handleChanges}/>
-    <label htmlFor="roomCount">Room Count</label>
-    <input
-      type="number"
-      id="roomCount"
-      name="roomCount"
-      value={formData.roomCount}
-      onChange={handleChanges}/>
-    <label htmlFor="bathroomCount">Bathroom Count</label>
-    <input
-      type="number"
-      id="bathroomCount"
-      name="bathroomCount"
-      value={formData.bathroomCount}
-      onChange={handleChanges}/>
-    <label htmlFor="guestCount">Guest Count</label>
-    <input
-      type="number"
-      id="guestCount"
-      name="guestCount"
-      value={formData.guestCount}
-      onChange={handleChanges}/>
-   <label htmlFor="locationValue">
+      onChange={handleChanges}
+    >
+      <option value="">Select category</option>
+      <option value="chalet">Chalet</option>
+      <option value="apartment">Apartment</option>
+      <option value="flat">Flat</option>
+    </select>
+      <label htmlFor="roomCount">Room Count</label>
+      <input
+        type="number"
+        id="roomCount"
+        name="roomCount"
+        max="9"
+        min="1"
+        value={formData.roomCount}
+        onChange={handleChanges} />
+      <label htmlFor="bathroomCount">Bathroom Count</label>
+      <input
+        type="number"
+        id="bathroomCount"
+        name="bathroomCount"
+        max="9"
+        min="1"
+        value={formData.bathroomCount}
+        onChange={handleChanges} />
+      <label htmlFor="guestCount">Guest Count</label>
+      <input
+        type="number"
+        id="guestCount"
+        name="guestCount"
+        max="30"
+        min="1"
+        value={formData.guestCount}
+        onChange={handleChanges} />
+      <label htmlFor="locationValue">
         Write your property location to obtain the coordinates
       </label>
       <div>
-        {/* Mostrar el campo de entrada solo si locationVisible es verdadero */}
-        
-          
-            <input
-              type="text"
-              id="locationValue"
-              name="locationValue"
-              value={formData.locationValue}
-              onChange={handleChanges}
-            />
-            <button type="button" onClick={handleLocationSearch}>
-              Search Location
-            </button>
-          
-        
+
+        <input
+          type="text"
+          id="locationValue"
+          name="locationValue"
+          value={formData.locationValue}
+          onChange={handleChanges}
+        />
+        <button type="button" onClick={handleLocationSearch}>
+          Search Location
+        </button>
+
+
         <button type="button" onClick={handleLocationChange}>
           Change Location
         </button>
       </div>
-    <label htmlFor="amenities">Amenities</label>
-    <input
-      type="text"
-      id="amenities"
-      name="amenities"
-      value={formData.amenities}
-      onChange={handleChanges}/>
-    <label htmlFor="price">Price</label>
-    <input
-      type="number"
-      id="price"
-      name="price"
-      value={formData.price}
-      onChange={handleChanges}/>
-    <label htmlFor="foto">Select a photo of your property, maximum 5 photos</label>
+      
+      <label htmlFor="amenities">Amenities</label>
+      <select
+        id="amenities"
+        name="amenities"
+        value={formData.amenities}
+        onChange={handleChanges}
+        multiple
+      >
+        <option value="wifi">WiFi</option>
+        <option value="tv">TV</option>
+        <option value="swimming pool">Swimming Pool</option>
+        <option value="bbq">BBQ</option>
+        <option value="garden">Garden</option>
+        <option value="kitchen">Kitchen</option>
+        <option value="parking">Parking</option>
+        <option value="air conditioner">Air Conditioner</option>
+        <option value="washer">Washer</option>
+        <option value="hairdryer">Hairdryer</option>
+        <option value="iron">Iron</option>
+        <option value="terrace">Terrace</option>
+      </select>
+      <label htmlFor="price">Price</label>
       <input
-         type="file"
-         id="foto"
-         name="foto"
-         accept="image/*"
-         multiple
-        
+        type="number"
+        id="price"
+        name="price"
+        min="1"
+        value={formData.price}
+        onChange={handleChanges} />
+      <label htmlFor="foto">Select a photo of your property, maximum 5 photos</label>
+      <input
+        type="file"
+        id="foto"
+        name="foto"
+        accept="image/*"
+        multiple
+
         onChange={handleImageChange}
       />
       <button type="submit">Create House</button>
