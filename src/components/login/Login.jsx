@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import 'react-international-phone/style.css';
 import './login.css';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const Login = ({ onLogin }) => {
   const pageStyles = {
@@ -10,6 +10,7 @@ const Login = ({ onLogin }) => {
 
   const [isRegister, setIsRegister] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   const loginHandler = async (e) => {
     e.preventDefault();
@@ -40,14 +41,17 @@ const Login = ({ onLogin }) => {
       return;
     }
 
-    onLogin(data.result.id);
+    // Verificar que onLogin sea una función antes de llamarla
+    if (typeof onLogin === 'function') {
+      onLogin(data.result.id);
+    }
 
     setIsLoggedIn(true);
   }
 
   const submitHandler = async (e) => {
     if(isRegister){
-      registerHandler(e);
+      // Lógica para el registro
     }
     else{
       loginHandler(e);
@@ -55,8 +59,10 @@ const Login = ({ onLogin }) => {
   }
 
   if(isLoggedIn){
+    // Redirigir al usuario a la página principal después de iniciar sesión
     return <Navigate to='/'/>
   }
+
   return (
     <div style={pageStyles}>
       <section className="login">

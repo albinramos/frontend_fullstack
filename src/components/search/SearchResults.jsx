@@ -40,6 +40,9 @@ const SearchResults = () => {
       const houseLat = parseFloat(house.locationValue.split(',')[0]);
       const houseLon = parseFloat(house.locationValue.split(',')[1]);
       const cityData = location.state.city;
+      console.log('cityData:', cityData);
+      console.log('houseLat:', houseLat);
+      console.log('houseLon:', houseLon);
 
       // Calcular la distancia entre la casa y la ciudad objetivo
       const distance = getDistance(cityData.lat, cityData.lon, houseLat, houseLon);

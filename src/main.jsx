@@ -10,6 +10,7 @@ import './index.css'
     <React.StrictMode>
       <App />
     </React.StrictMode>,
+
   )
 
 

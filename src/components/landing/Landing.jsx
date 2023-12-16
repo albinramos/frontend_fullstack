@@ -5,7 +5,7 @@ import CityAutosuggest from './../cityAutosuggest';
 import { fetchCityData } from '../../apiUtils';
 
 
-const Landing = () => {
+const Landing = (isLoggedIn, handleLogout) => {
   const pageStyles = {
     minHeight: '100vh'
   };
@@ -27,6 +27,16 @@ const Landing = () => {
     setSelectedHouse(house);
     // Utiliza navigate para redirigir a HouseDetails y pasar la información en state
     navigate(`/housedetails/${house.id}`, { state: { selectedHouse: house } });
+  };
+
+  const handleLogoutClick = () => {
+    // Llamar a la función de logout
+    handleLogout();
+  };
+
+  const handleLandingClick = () => {
+    // Use the navigate function to go to the login page
+    navigate('/');
   };
 
   const getHouses = async () => {
@@ -74,11 +84,25 @@ const Landing = () => {
     event.preventDefault();
     try{
       const searchpoint = `http://localhost:3666/search?startDate=${arrivalDate}&endDate=${departDate}&guestCount=${guests}&location=${city.lat},${city.lon}`;
+      
+  try {
+  const response = await fetch(searchpoint, { credentials: 'include' });
+  const data = await response.json();
+  console.log("response", response);
+  console.log("dataaaaaa", data);
+
+  const cityName = city.name;
+  const citySlug = cityName.toLowerCase().replace(/\s/g, '-');
+
+  navigate(`/cities/${citySlug}`, { state: { data } });
+} catch (error) {
+  console.log("Error fetching search data:", error);
+}
       const response = await fetch(searchpoint, {credentials: 'include'});
       console.log("response",response);
       const data = await response.json();
       console.log("dataaaaaa",data);
-      navigate(`/cities/${citySlug}`, { data });
+      navigate(`/cities/${cityName}`, { data });
     }
     catch{
       console.log("error");
@@ -91,6 +115,7 @@ const Landing = () => {
     console.log("2:",city.lat);
     console.log("3:",city.lon);
     console.log("1:",cityName);
+    console.log("4:",citySlug);
     // Navigate to the search page with the form data and cityData
   };
 
@@ -100,6 +125,10 @@ const Landing = () => {
   return (
     <div style={pageStyles}>
       <section className="landing">
+        {/* Mostrar "LOGIN" o "LOGOUT" según el estado de autenticación */}
+        <p className="login-p" onClick={isLoggedIn ? handleLogoutClick : handleLoginClick}>
+          {isLoggedIn ? 'LOGOUT' : 'LOGIN'}
+        </p>
         <h1>Landing</h1>
         <div className='landing__input'>
           <form className='landing__form' onSubmit={handleSubmit}>
