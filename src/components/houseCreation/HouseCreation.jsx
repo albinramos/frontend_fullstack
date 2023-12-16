@@ -15,7 +15,7 @@ const HouseCreation = () => {
     price: "",
     userId: "",
   });
-  const [locationVisible, setLocationVisible] = useState(true);
+  
 
   const handleChanges = (event) => {
     const { name, value } = event.target;
@@ -53,12 +53,7 @@ const HouseCreation = () => {
          
         });
 
-        // Mostrar el campo de entrada después de obtener resultados
-        setLocationVisible(true);
-      } else {
-        console.log("No se encontraron coordenadas para la dirección ingresada.");
-        // Ocultar el campo de entrada si no se encuentran coordenadas
-        setLocationVisible(false);
+       
       }
     } catch (error) {
       console.error("Error al buscar coordenadas:", error.message);
@@ -66,8 +61,11 @@ const HouseCreation = () => {
   };
 
   const handleLocationChange = () => {
-    locationValue=
-    setLocationVisible(true);
+    setFormData({
+      ...formData,
+      locationValue: "",  
+    });
+   
   };
 
   const creationHandler = async (e) => {
@@ -150,26 +148,25 @@ if (formData.imageSrc){
       name="guestCount"
       value={formData.guestCount}
       onChange={handleChanges}/>
-  <label htmlFor="locationValue">
+   <label htmlFor="locationValue">
         Write your property location to obtain the coordinates
       </label>
       <div>
+        {/* Mostrar el campo de entrada solo si locationVisible es verdadero */}
         
-        {locationVisible ? (
-          <input
-            type="text"
-            id="locationValue"
-            name="locationValue"
-            value={formData.locationValue}
-            onChange={handleChanges}
-          />
-        ) : (
-          <div>{formData.locationValue}</div>
-        )}
-        <button type="button" onClick={handleLocationSearch}>
-          Search Location
-        </button>
-        {/* Botón "Change Location" */}
+          
+            <input
+              type="text"
+              id="locationValue"
+              name="locationValue"
+              value={formData.locationValue}
+              onChange={handleChanges}
+            />
+            <button type="button" onClick={handleLocationSearch}>
+              Search Location
+            </button>
+          
+        
         <button type="button" onClick={handleLocationChange}>
           Change Location
         </button>
