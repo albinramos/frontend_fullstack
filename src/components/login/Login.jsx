@@ -63,6 +63,11 @@ const Login = ({ onLogin }) => {
     return <Navigate to='/'/>
   }
 
+  const navigateToRegister = () => {
+    // Utiliza la función navigate para redirigir a la página de registro
+    navigate('/register');
+  };
+
   return (
     <div style={pageStyles}>
       <section className="login">
@@ -71,6 +76,10 @@ const Login = ({ onLogin }) => {
           <input type="email" placeholder="Email" className='form__email' name='email' />
           <input type="password" placeholder="Password" className='form__password' name='password' />
           <button type="submit">Login</button>
+          <p className="login__register-link" onClick={navigateToRegister}>
+            {isRegister ? 'Login' : 'Register '}
+             If you're not registered yet
+          </p>
         </form>
       </section>
     </div>
