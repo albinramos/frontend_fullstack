@@ -14,7 +14,8 @@
 .landing__p-card{
   text-align: center;
   font-size: var(--p-font-size);
-  margin: 10px;
+  /* margin: 10px; */
+  padding: 10px;
 }
 
 .landing__p-card-last{
@@ -44,7 +45,7 @@
   flex-direction: column;
   width: 80%; 
   margin-bottom: 20px; 
-  border: 0.5px solid #422800;
+  /* border: 0.5px solid #422800; */
   -webkit-box-shadow: 6px 6px 8px 0px rgba(0,0,0,0.25);
   -moz-box-shadow: 6px 6px 8px 0px rgba(0,0,0,0.25);
   box-shadow: 6px 6px 8px 0px rgba(0,0,0,0.25);
@@ -52,6 +53,18 @@
   /* padding: 20px; */
   margin: auto;
   margin-bottom: 40px;
+  background-color: #FFFFFF;
+}
+
+.landing__house-card__price{
+  background-color: #fbeee0;
+  width: 30%;
+  position: absolute;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  justify-content: right !important;
+  border: 2px solid black;
+
 }
 
 
@@ -149,6 +162,23 @@
   margin: auto;
 }
 
+.landing__house-card-block-main{
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  margin: 20px;
+}
+
+.landing__house-card-block1{
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+}
+
+.landing__house-card-block2{
+  display: flex;
+  flex-direction: row;
+}
 
 
 

@@ -71,16 +71,18 @@ const Login = ({ onLogin }) => {
   return (
     <div style={pageStyles}>
       <section className="login">
-        <h1>Login</h1>
+        <img src='../src/assets/logo.jpg' alt='logo' className='logo-login'/>
+        <div className='login__input'>
         <form className='login__form' onSubmit={submitHandler}>
           <input type="email" placeholder="Email" className='form__email' name='email' />
           <input type="password" placeholder="Password" className='form__password' name='password' />
-          <button type="submit">Login</button>
+          <button type="submit" className="button-74">Login</button>
           <p className="login__register-link" onClick={navigateToRegister}>
-            {isRegister ? 'Login' : 'Register '}
+            {isRegister ? 'Login' : <strong> Register </strong>}
              If you're not registered yet
           </p>
         </form>
+        </div>
       </section>
     </div>
   );
