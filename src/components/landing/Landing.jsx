@@ -11,6 +11,17 @@ const Landing = (isLoggedIn, handleLogout) => {
   };
 
   const navigate = useNavigate();
+  const [isMenuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!isMenuOpen);
+  };
+
+  const goToProfile = () => {
+    navigate('/profile');
+    setMenuOpen(false); // Cerrar el menú después de hacer clic en una opción
+  };
+
 
   const [randomHouses, setRandomHouses] = useState([]);
   const [city, setCity] = useState('');
@@ -125,10 +136,19 @@ const Landing = (isLoggedIn, handleLogout) => {
   return (
     <div style={pageStyles}>
       <section className="landing">
+      {/* Botón para abrir/cerrar el menú */}
+      <div className="menu-toggle" onClick={toggleMenu}>
+          {isMenuOpen ? '✕' : '☰'}
+        </div>
         {/* Mostrar "LOGIN" o "LOGOUT" según el estado de autenticación */}
-        <p className="login-p" onClick={isLoggedIn ? handleLogoutClick : handleLoginClick}>
-          {isLoggedIn ? 'LOGOUT' : 'LOGIN'}
-        </p>
+        {/* Renderizar el menú según el estado de autenticación y isMenuOpen */}
+        {isLoggedIn && isMenuOpen && (
+          <div className="user-menu">
+            <p onClick={goToProfile}>Perfil</p>
+            <p onClick={() => navigate('/housecreation/:id')}>Add House</p>
+            <p onClick={handleLogout}>Logout</p>
+          </div>
+        )}
         <h1>Landing</h1>
         <div className='landing__input'>
           <form className='landing__form' onSubmit={handleSubmit}>
@@ -160,14 +180,23 @@ const Landing = (isLoggedIn, handleLogout) => {
             return (
               <div key={index} className='landing__house-card'>
                 {imageElement}
+                <div className='landing__house-card__price'>
+                <p className='landing__p-card-price'>{house.price} €</p>
+                </div>
                 <h2 className='landing__h2-title'>{house.title}</h2>
-                <p className='landing__p-card'>City: {house.cityName}</p>
-                <p className='landing__p-card'>Nº of rooms: {house.roomCount}</p>
-                <p className='landing__p-card-price'>Price: {house.price}</p>
-                <p className='landing__p-card-last'>Total Guests Number: {house.guestCount}</p>
-                <button className="button-74" onClick={() => handleMoreInfoClick(house)}>
-                  More Info
-                </button>
+                <div className='landing__house-card-block-main'>
+                <div className='landing__house-card-block1'>
+                  <p className='landing__p-card'><strong>City:</strong> {house.cityName}</p>
+                  <p className='landing__p-card'><strong>Rooms Nº: </strong> {house.roomCount}</p>
+                </div>
+                <div className='landing__house-card-block1'>
+                  <p className='landing__p-card'><strong>Bathrooms Nº: </strong>{house.bathroomCount}</p>
+                  <p className='landing__p-card'><strong>Total Guests Number: </strong>{house.guestCount}</p>
+                </div>
+                  </div>
+                    <button className="button-74" onClick={() => handleMoreInfoClick(house)}>
+                      More Info
+                    </button>
               </div>
             );
           })}

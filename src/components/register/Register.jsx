@@ -59,7 +59,8 @@ const Register = () => {
   return (
     <div style={pageStyles}>
     <section className="register">
-    <h1>Register</h1>
+    <img src='../src/assets/logo.jpg' alt='logo' className='logo-login'/>
+    <h1>REGISTER</h1>
     <form className='register__form' onSubmit={registerHandler}>
     <input type='text' placeholder='First Name'className='form__name'name='firstName'/>
     <input type='text' placeholder='Last Name'className='form__last'name='lastName'/>
@@ -75,7 +76,7 @@ const Register = () => {
     <input type="password" placeholder="Confirm Password" className='form__password'name='confirmPassword'/>
     <p className='register__photo'>Select your profile photo:</p>
     <input type='file' className='form__file'name='image'/>
-    <button type="submit">Register</button>
+    <button type="submit" className='button-74'>Register</button>
   </form>  
   </section>
   </div>
