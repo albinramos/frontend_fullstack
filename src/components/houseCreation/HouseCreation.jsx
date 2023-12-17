@@ -112,7 +112,7 @@ const HouseCreation = () => {
   const navigate = useNavigate();
 
   return (
-    <form onSubmit={creationHandler} encType="multipart/form-data">
+    <form onSubmit={creationHandler} encType="multipart/form-data" className="form__house-creation">
       <label htmlFor="title">Title</label>
       <input
         type="text"
@@ -121,19 +121,23 @@ const HouseCreation = () => {
         required
         value={formData.title}
         onChange={handleChanges}
+        className="from__house-creation-input"
       />
       <label htmlFor="description">Description</label>
       <textarea
         id="description"
         name="description"
         value={formData.description}
-        onChange={handleChanges} />
+        onChange={handleChanges} 
+        className="from__house-creation-input"
+      />
       <label htmlFor="category">Category</label>
     <select
       id="category"
       name="category"
       value={formData.category}
       onChange={handleChanges}
+      className="from__house-creation-input"
     >
       <option value="">Select category</option>
       <option value="chalet">Chalet</option>
@@ -148,7 +152,9 @@ const HouseCreation = () => {
         max="9"
         min="1"
         value={formData.roomCount}
-        onChange={handleChanges} />
+        onChange={handleChanges}
+        className="from__house-creation-input"
+       />
       <label htmlFor="bathroomCount">Bathroom Count</label>
       <input
         type="number"
@@ -157,7 +163,9 @@ const HouseCreation = () => {
         max="9"
         min="1"
         value={formData.bathroomCount}
-        onChange={handleChanges} />
+        onChange={handleChanges} 
+        className="from__house-creation-input"
+      />
       <label htmlFor="guestCount">Guest Count</label>
       <input
         type="number"
@@ -166,7 +174,9 @@ const HouseCreation = () => {
         max="30"
         min="1"
         value={formData.guestCount}
-        onChange={handleChanges} />
+        onChange={handleChanges} 
+        className="from__house-creation-input"
+      />
       <label htmlFor="locationValue">
         Write your property location to obtain the coordinates
       </label>
@@ -178,13 +188,14 @@ const HouseCreation = () => {
           name="locationValue"
           value={formData.locationValue}
           onChange={handleChanges}
+          className="from__house-creation-input"
         />
-        <button type="button" onClick={handleLocationSearch}>
+        <button type="button" onClick={handleLocationSearch} className="from__house-creation-input">
           Search Location
         </button>
 
 
-        <button type="button" onClick={handleLocationChange}>
+        <button type="button" onClick={handleLocationChange} className="from__house-creation-input">
           Change Location
         </button>
       </div>
@@ -196,6 +207,7 @@ const HouseCreation = () => {
         value={formData.amenities}
         onChange={handleChanges}
         multiple
+        className="from__house-creation-select"
       >
         <option value="wifi">WiFi</option>
         <option value="tv">TV</option>
@@ -217,7 +229,9 @@ const HouseCreation = () => {
         name="price"
         min="1"
         value={formData.price}
-        onChange={handleChanges} />
+        onChange={handleChanges}
+        className="from__house-creation-input"
+      />
       <label htmlFor="foto">Select a photo of your property, maximum 5 photos</label>
       <input
         type="file"
@@ -225,10 +239,10 @@ const HouseCreation = () => {
         name="foto"
         accept="image/*"
         multiple
-
         onChange={handleImageChange}
+        className="from__house-creation-input"
       />
-      <button type="submit">Create House</button>
+      <button type="submit" className="button-74">Create House</button>
     </form>
   );
 };

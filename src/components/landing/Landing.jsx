@@ -96,24 +96,28 @@ const Landing = (isLoggedIn, handleLogout) => {
     try{
       const searchpoint = `http://localhost:3666/search?startDate=${arrivalDate}&endDate=${departDate}&guestCount=${guests}&location=${city.lat},${city.lon}`;
       
-  try {
-  const response = await fetch(searchpoint, { credentials: 'include' });
-  const data = await response.json();
-  console.log("response", response);
-  console.log("dataaaaaa", data);
+        try {
+          const response = await fetch(searchpoint, { credentials: 'include' });
+          //console.log('Response Status:', response.status);
+          //console.log('Response Headers:', response.headers);
 
-  const cityName = city.name;
-  const citySlug = cityName.toLowerCase().replace(/\s/g, '-');
+          const data = await response.json();
+          console.log("response", response);
+          console.log("dataaaaaa", data);
 
-  navigate(`/cities/${citySlug}`, { state: { data } });
-} catch (error) {
-  console.log("Error fetching search data:", error);
-}
+          const cityName = city.name;
+          const citySlug = cityName.toLowerCase().replace(/\s/g, '-');
+
+          navigate(`/cities/${citySlug}`, { state: { data, city,        arrivalDate, departDate, guests } });
+  
+          } catch (error) {
+            console.log("Error fetching search data:", error);
+          }
       const response = await fetch(searchpoint, {credentials: 'include'});
       console.log("response",response);
       const data = await response.json();
       console.log("dataaaaaa",data);
-      navigate(`/cities/${cityName}`, { data });
+      navigate(`/cities/${cityName}`, { state: { data } });
     }
     catch{
       console.log("error");
@@ -144,9 +148,9 @@ const Landing = (isLoggedIn, handleLogout) => {
         {/* Renderizar el menú según el estado de autenticación y isMenuOpen */}
         {isLoggedIn && isMenuOpen && (
           <div className="user-menu">
-            <p onClick={goToProfile}>Perfil</p>
-            <p onClick={() => navigate('/housecreation/:id')}>Add House</p>
-            <p onClick={handleLogout}>Logout</p>
+            <p onClick={() => navigate('/user')} className='menu-option'>User Details</p>
+            <p onClick={() => navigate('/housecreation/:id')} className='menu-option'>Add House</p>
+            <p onClick={handleLogout} className='menu-option'>Logout</p>
           </div>
         )}
         <h1>Landing</h1>
@@ -175,7 +179,7 @@ const Landing = (isLoggedIn, handleLogout) => {
               imageElement = (
                 <img src='../src/assets/no-image.jpg' alt={`No Image`} className='landing__img' />
               );
-            }
+          }
 
             return (
               <div key={index} className='landing__house-card'>

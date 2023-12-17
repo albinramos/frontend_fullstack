@@ -17,7 +17,7 @@ const SearchResults = () => {
   const handleMoreInfoClick = (house) => {
     setSelectedHouse(house);
     // Utiliza navigate para redirigir a HouseDetails y pasar la información en state
-    navigate(`/housedetails/${house.id}`, { state: { selectedHouse: house } });
+    navigate(`/housedetails/${house.id}`, { state: { selectedHouse: house, arrivalDate: location.state.arrivalDate, departDate: location.state.departDate, guests: location.state.guests } });
   };
 
 
@@ -29,20 +29,22 @@ const SearchResults = () => {
     getHouses();
   }, []);
 
+  //console.log('Location State City:', location.state.city);
+
   const getHouses = async () => {
     const endpoint = 'http://localhost:3666/house';
-    const response = await fetch(endpoint);
+    const response = await fetch(endpoint, { credentials: 'include' });
     const data = await response.json();
-    console.log('data:', data);
+    //console.log('data:', data);
 
     // Filtrar las casas por la ciudad especificada en cityData y alrededores (100 km)
-    const filteredHouses = data.houses.filter((house) => {
+      const filteredHouses = data.houses.filter((house) => {
       const houseLat = parseFloat(house.locationValue.split(',')[0]);
       const houseLon = parseFloat(house.locationValue.split(',')[1]);
       const cityData = location.state.city;
-      console.log('cityData:', cityData);
-      console.log('houseLat:', houseLat);
-      console.log('houseLon:', houseLon);
+      //console.log('cityData:', cityData);
+      //console.log('houseLat:', houseLat);
+      //console.log('houseLon:', houseLon);
 
       // Calcular la distancia entre la casa y la ciudad objetivo
       const distance = getDistance(cityData.lat, cityData.lon, houseLat, houseLon);

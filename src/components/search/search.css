@@ -67,11 +67,11 @@ body{
   margin-bottom: 80px;
 }
 
-.popup__container{
+/* .popup__container{
   background-color: tomato;
   padding: 40px;
   max-width: 1280px;
-}
+} */
 
 .slider-img{
   width: 95%;

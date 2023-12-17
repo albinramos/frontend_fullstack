@@ -5,6 +5,18 @@
   padding: 10px;
 }
 
+.menu-toggle{
+  display: flex;
+  justify-content: right;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.menu-option{
+  display: flex;
+  justify-content: right;
+}
+
 .landing__h2-title{
   text-align: center;
   font-size: var(--h2-font-size);
@@ -53,11 +65,11 @@
   /* padding: 20px; */
   margin: auto;
   margin-bottom: 40px;
-  background-color: #FFFFFF;
+  background-color: blanchedalmond;
 }
 
 .landing__house-card__price{
-  background-color: #fbeee0;
+  background-color: #ffff;
   width: 30%;
   position: absolute;
   border-top-left-radius: 10px;
@@ -206,9 +218,23 @@
   }
 
   .button-74 {
-    min-width: 120px;
+    width: 160px;
     padding: 0 25px;
+
   }
+
+  .landing__house-card__price{
+    width: 15%
+  }
+
+}
+
+@media screen and (min-width: 1024px){
+
+.landing__house-card{
+  width: 25%;
+  margin: 20px;
+}
 
 
 

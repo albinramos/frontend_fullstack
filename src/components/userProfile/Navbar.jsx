@@ -13,7 +13,7 @@ const Navbar = ({ setActiveSection, activeSection }) => {
   
         if (response.ok) {
           // Si el cierre de sesión es exitoso, redirigir a la página de inicio
-          window.location.href = 'http://localhost:5173/';
+          window.location.href = 'http://localhost:5175/';
         } else {
           console.error('Error al cerrar sesión');
         }
