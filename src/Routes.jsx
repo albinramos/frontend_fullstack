@@ -7,6 +7,7 @@ import SearchResults from './components/search/SearchResults';
 import Landing from './components/landing/Landing';
 import HouseDetails from './components/houseDetails/HouseDetails';
 import HouseCreation from './components/houseCreation/HouseCreation';
+import UserProfilePage from './components/userProfile/UserProfilePage';
 
 
 const RoutesComponent = () => {
@@ -19,6 +20,8 @@ const RoutesComponent = () => {
         <Route path="/cities/:city" element={<SearchResults />} />
         <Route path="/housedetails/:id" element={<HouseDetails />} />
         <Route path="/housecreation/:id" element={<HouseCreation />} />
+        <Route path="/user" element={<UserProfilePage />} />
+        
       </Routes>
     </Router>
   );
