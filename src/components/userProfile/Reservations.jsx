@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import './userProfile.css'; // Asegúrate de importar el archivo CSS
 
 const Reservations = ({ userId }) => {
   const [reservations, setReservations] = useState([]);
-console.log(reservations)
+
   useEffect(() => {
     const fetchReservations = async () => {
       try {
@@ -25,59 +26,93 @@ console.log(reservations)
     fetchReservations();
   }, [userId]);
 
-  const handleCancelReservation = async (reservationId) => {
-    const confirmation = window.confirm('¿Estás seguro de que quieres cancelar esta reserva?');
+  const calculateDaysUntilReservation = (startDate) => {
+    const today = new Date();
+    const reservationDate = new Date(startDate);
+    const timeDifference = reservationDate.getTime() - today.getTime();
+    return Math.ceil(timeDifference / (1000 * 3600 * 24));
+  };
 
-    if (confirmation) {
-      try {
-        const response = await fetch(`http://localhost:3666/reservations/${reservationId}`, {
-          method: 'POST',
-          credentials: 'include',
-        });
+  const getCurrentReservations = () => {
+    const now = Date.now();
+    return reservations.filter((reservation) => now >= new Date(reservation.startDate) && now <= new Date(reservation.endDate));
+  };
 
-        if (!response.ok) {
-          throw new Error(`Error al cancelar la reserva: ${response.statusText}`);
-        }
+  const getFutureReservations = () => {
+    const now = Date.now();
+    return reservations.filter((reservation) => new Date(reservation.startDate) > now);
+  };
 
-        // Actualizar la lista de reservas después de la cancelación
-        const updatedReservations = reservations.filter((reservation) => reservation.id !== reservationId);
-        setReservations(updatedReservations);
-      } catch (error) {
-        console.error(error.message);
-      }
-    }
+  const getPastReservations = () => {
+    const now = Date.now();
+    return reservations.filter((reservation) => new Date(reservation.endDate) < now);
   };
 
   return (
-    <div>
+    <div className='reservations--container'>
       <h3>Reservations</h3>
-      {reservations.length === 0 ? (
-        <p>No hay reservas pendientes.</p>
-      ) : (
-        <ul>
-          {reservations.map((reservation) => (
-            <li key={reservation.id}>
-              <strong>Details:</strong> {reservation.details} <br />
-              <strong>Start Date:</strong> {new Date(reservation.startDate).toLocaleDateString()} <br />
-              <strong>End Date:</strong> {new Date(reservation.endDate).toLocaleDateString()} <br />
-              <strong>Price:</strong> ${reservation.price} <br />
-              <strong>Días hasta la reserva:</strong> {calculateDaysUntilReservation(reservation.startDate)} <br />
-              <button onClick={() => handleCancelReservation(reservation.id)}>Cancelar Reserva</button>
-            </li>
-          ))}
-        </ul>
-      )}
+      <div className="reservation-cards-container">
+        
+        {getCurrentReservations().length > 0 && (
+          <div className="reservation-card-container">
+            <h4>Ongoing reservations</h4>
+            {getCurrentReservations().map((reservation) => (
+              <div key={reservation.id} className="reservation-card">
+                <div className="reservation-card-details">Details: {reservation.details}</div>
+                <div className="reservation-card-date">
+                  Start Date: {new Date(reservation.startDate).toLocaleDateString()} <br />
+                  End Date: {new Date(reservation.endDate).toLocaleDateString()}
+                </div>
+                <div className="reservation-card-price">Price: ${reservation.price}</div>
+               
+              </div>
+            ))}
+          </div>
+        )}
+
+       
+        {getFutureReservations().length > 0 && (
+          <div className="reservation-card-container">
+            <h4>Upcoming reservations</h4>
+            {getFutureReservations().map((reservation) => (
+              <div key={reservation.id} className="reservation-card">
+                <div className="reservation-card-details">Details: {reservation.details}</div>
+                <div className="reservation-card-date">
+                  Start Date: {new Date(reservation.startDate).toLocaleDateString()} <br />
+                  End Date: {new Date(reservation.endDate).toLocaleDateString()}
+                </div>
+                <div className="reservation-card-price">Price: ${reservation.price}</div>
+                <div className="reservation-card-days">
+                  Days until reservation: {calculateDaysUntilReservation(reservation.startDate)}
+                </div>
+                <button className="reservation-card-cancel" onClick={() => handleCancelReservation(reservation.id)}>
+                  Cancelar Reserva
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+
+
+        {getPastReservations().length > 0 && (
+          <div className="reservation-card-container">
+            <h4>ended reservations</h4>
+            {getPastReservations().map((reservation) => (
+              <div key={reservation.id} className="reservation-card">
+                <div className="reservation-card-details">Details: {reservation.details}</div>
+                <div className="reservation-card-date">
+                  Start Date: {new Date(reservation.startDate).toLocaleDateString()} <br />
+                  End Date: {new Date(reservation.endDate).toLocaleDateString()}
+                </div>
+                <div className="reservation-card-price">Price: ${reservation.price}</div>
+                
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
-};
-
-const calculateDaysUntilReservation = (startDate) => {
-  const today = new Date();
-  const reservationDate = new Date(startDate);
-  const timeDifference = reservationDate.getTime() - today.getTime();
-  const daysUntilReservation = Math.ceil(timeDifference / (1000 * 3600 * 24));
-
-  return daysUntilReservation;
 };
 
 export default Reservations;

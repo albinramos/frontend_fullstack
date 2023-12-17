@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import './userProfile.css';
+import HouseCreation from '../houseCreation/HouseCreation';
+import { Link } from 'react-router-dom';
 
 const Houses = ({ userId }) => {
   const [houses, setHouses] = useState([]);
   const [visibilityStates, setVisibilityStates] = useState({});
+  const [showAddHouseButton, setShowAddHouseButton] = useState(false);
 
   useEffect(() => {
     const fetchHouses = async () => {
@@ -17,16 +21,18 @@ const Houses = ({ userId }) => {
         }
 
         const data = await response.json();
-        console.log("holii", data);
 
         // Inicializar el estado de visibilidad para cada casa
         const initialVisibilityStates = {};
-        data.house.forEach(house => {
+        data.house.forEach((house) => {
           initialVisibilityStates[house._id] = house.reservationsEnabled;
         });
         setVisibilityStates(initialVisibilityStates);
 
         setHouses(data.house);
+
+        // Verificar si hay casas para determinar si se debe mostrar el botón "Add House"
+        setShowAddHouseButton(data.house.length === 0);
       } catch (error) {
         console.error(error.message);
       }
@@ -46,22 +52,23 @@ const Houses = ({ userId }) => {
         throw new Error(`Error al cambiar la visibilidad de la casa: ${response.statusText}`);
       }
 
-     
-      setHouses(prevHouses => prevHouses.map(house => {
-        if (house._id === houseId) {
-          return {
-            ...house,
-            reservationsEnabled: isVisible,
-          };
-        }
-        return house;
-      }));
-      setVisibilityStates(prevVisibilityStates => ({
+      setHouses((prevHouses) =>
+        prevHouses.map((house) => {
+          if (house._id === houseId) {
+            return {
+              ...house,
+              reservationsEnabled: isVisible,
+            };
+          }
+          return house;
+        })
+      );
+      setVisibilityStates((prevVisibilityStates) => ({
         ...prevVisibilityStates,
         [houseId]: isVisible,
       }));
 
-      console.log("Visibility changed successfully");
+      console.log('Visibility changed successfully');
     } catch (error) {
       console.error(error.message);
     }
@@ -70,18 +77,28 @@ const Houses = ({ userId }) => {
   return (
     <div>
       <h3>Your Houses</h3>
-      {houses.map((house) => (
-        <div key={house._id}>
-          <p>Title: {house.title}</p>
-          <p>Description: {house.description}</p>
+      
+      <button className="add-house-button" onClick={() => window.location.href = `/housecreation/${houses[0].userId}`}>
+  Add House
+</button>
+      
 
-          <button onClick={() => handleChangeVisibility(house._id, !house.reservationsEnabled)}>
-            {house.reservationsEnabled ? 'Hide from Reservations' : 'Show in Reservations'}
-          </button>
-        </div>
-      ))}
+      <ul className="houses-list">
+        {houses.map((house) => (
+          <li key={house._id} className="house-card">
+            <p className="house-card-title">Title: {house.title}</p>
+            <p className="house-card-description">Description: {house.description}</p>
+            <button
+              className="house-card-visibility"
+              onClick={() => handleChangeVisibility(house._id, !house.reservationsEnabled)}
+            >
+              {house.reservationsEnabled ? 'Hide from Reservations' : 'Show in Reservations'}
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
-  );
+  )
 };
 
 export default Houses;

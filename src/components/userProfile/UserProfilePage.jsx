@@ -1,8 +1,10 @@
+
 import React, { useEffect, useState } from 'react';
 import UserInfo from './UserInfo';
 import Reservations from './Reservations';
 import Houses from './Houses';
 import Navbar from './Navbar';
+import "./userProfile.css";
 
 const UserProfilePage = () => {
   const [userData, setUserData] = useState(null);
@@ -15,6 +17,16 @@ const UserProfilePage = () => {
           method: 'GET',
           credentials: 'include',
         });
+
+        if (!response.ok) {
+          if (response.status === 401) {
+            window.location.href = 'http://localhost:5173/login';
+            return;
+          } else {
+            console.error(`Error al obtener datos del usuario: ${response.status}`);
+            return;
+          }
+        }
 
         const data = await response.json();
 
@@ -37,12 +49,12 @@ const UserProfilePage = () => {
   }, []); 
 
   return (
-    <div style={{ display: 'flex' }}>
+    <div className="user-profile-container">
       <Navbar setActiveSection={setActiveSection} activeSection={activeSection} />
-      <div style={{ marginLeft: '20px' }}>
+      <div className="user-profile-content">
         {userData && (
           <>
-            {activeSection === 'userinfo' && <UserInfo userData={userData} />}
+            {activeSection === 'userinfo' && <UserInfo userData={userData.user} />}
             {activeSection === 'reservations' && <Reservations userId={userData.user._id} />}
             {activeSection === 'houses' && userData.user.userType.some(type => type.toLowerCase().includes('owner')) && <Houses userId={userData.user._id} />}
           </>
@@ -53,3 +65,4 @@ const UserProfilePage = () => {
 };
 
 export default UserProfilePage;
+

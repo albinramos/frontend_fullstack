@@ -18,7 +18,7 @@ const Landing = (isLoggedIn, handleLogout) => {
   };
 
   const goToProfile = () => {
-    navigate('/profile');
+    navigate('/user');
     setMenuOpen(false); // Cerrar el menú después de hacer clic en una opción
   };
 
