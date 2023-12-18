@@ -25,9 +25,14 @@ const HouseDetails = () => {
     navigate(-1, { state: { selectedHouse: null } });
   };
 
+  const handleAvailableDates = () => {
+    navigate('/')
+  }
+
   const handleReservation = async (e) => {
     e.preventDefault();
-    try {
+  
+  try {
       const houseId = selectedHouse._id;
       const startDate = location.state.arrivalDate;
       const endDate = location.state.departDate;
@@ -115,12 +120,22 @@ const HouseDetails = () => {
             ))}
           </div>
           <div className="search__buttons">
-            <button
-              className="reservation__button button-74"
-              onClick={handleReservation}
-            >
-              Reservation
-            </button>
+            {location.state.arrivalDate && location.state.departDate && (
+              <button
+                className="reservation__button button-74"
+                onClick={handleReservation}
+              >
+                Reservation
+              </button>
+            )}
+            {!location.state.arrivalDate && !location.state.departDate && (
+              <button
+                className="reservation__button button-74"
+                onClick={handleAvailableDates}
+              >
+                Find available dates
+              </button>
+            )}
             <button
               onClick={resetSelectedHouse}
               className="close__button button-74"
