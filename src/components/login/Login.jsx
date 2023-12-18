@@ -3,6 +3,7 @@ import 'react-international-phone/style.css';
 import './login.css';
 import { Navigate, useNavigate } from 'react-router-dom';
 
+
 const Login = ({ onLogin }) => {
   const pageStyles = {
     minHeight: '100vh'
@@ -33,6 +34,7 @@ const Login = ({ onLogin }) => {
     })
 
     const data= await result.json();
+    localStorage.setItem('userId', data.result.id);
     console.log(data);
     console.log(data.result);
     console.log(data.result.id);

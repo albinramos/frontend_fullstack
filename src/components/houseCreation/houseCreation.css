@@ -1,0 +1,25 @@
+.form__house-creation{
+  display: flex;
+  flex-direction: column;
+}
+
+
+.from__house-creation-input{
+  margin: 10px;
+  display: flex;
+  font-size: 18px;
+  border-radius: 10px;
+  height: 30px;
+  text-align: center;
+  justify-content: center;
+}
+
+.from__house-creation-select{
+  margin: 10px;
+  display: flex;
+  font-size: 18px;
+  border-radius: 10px;
+  height: 100px;
+  text-align: center;
+  justify-content: center;
+}
