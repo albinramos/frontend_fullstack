@@ -19,7 +19,7 @@ const SearchResults = () => {
   const handleMoreInfoClick = (house) => {
     setSelectedHouse(house);
     // Utiliza navigate para redirigir a HouseDetails y pasar la información en state
-    navigate(`/housedetails/${house._id}`, { state: { selectedHouse: house, arrivalDate: location.state.arrivalDate, departDate: location.state.departDate, guests: location.state.guests } });
+    navigate(`/housedetails/${house._id}`, { state: { selectedHouse: house, arrivalDate: location.state.data.Result.arrivalDate, departDate: location.state.data.Result.departDate, guests: location.state.data.Result.guests } });
   };
 
 
@@ -84,7 +84,7 @@ const SearchResults = () => {
   const deg2rad = (deg) => deg * (Math.PI / 180);
 
   const getGeolocation = () => {
-    return houses.map((house) => ({
+    return location.state.data.Result.map((house) => ({
       lat: parseFloat(house.locationValue.split(',')[0]),
       lon: parseFloat(house.locationValue.split(',')[1]),
     }));
@@ -122,7 +122,7 @@ const SearchResults = () => {
         <h2>Houses</h2>
         <div className="houses__container-main">
           <div className="houses__container">
-            {houses.map((house, index) => (
+            {location.state.data.Result.map((house, index) => (
               <div key={index} className="house__card">
                 <h2 className="houses__h2-title">{house.title}</h2>
                 <p>City: {location.state.city.name}</p>

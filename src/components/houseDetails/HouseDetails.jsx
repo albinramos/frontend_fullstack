@@ -34,12 +34,12 @@ const HouseDetails = () => {
   
   try {
       const houseId = selectedHouse._id;
-      const startDate = location.state.arrivalDate;
-      const endDate = location.state.departDate;
-      const guests = location.state.guests;
-      const price = selectedHouse.price;
+      const startDate = location.state.selectedHouse.startDate;
+      const endDate = location.state.selectedHouse.endDate;
+      const guests = location.state.selectedHouse.guests;
+      const price = location.state.selectedHouse.price;
       const userId = localStorage.getItem("userId");
-      const img = selectedHouse.imageSrc;
+      const img = location.state.selectedHouse.imageSrc;
       console.log('imaaaaagen:',img);
       console.log('SEEEEEEELEEEEEECTED:', selectedHouse);
 
@@ -72,11 +72,12 @@ const HouseDetails = () => {
     }
   };
 
-  console.log(location.state.arrivalDate);
+  console.log(location.state.selectedHouse.arrivalDate);
   console.log(location.state.departDate);
   console.log(location.state.guests);
-  console.log(location.state.selectedHouse);
+  console.log("looooooca:",location.state.selectedHouse);
   console.log(location.state.selectedHouse.price);
+
 
   return (
     <>
@@ -87,9 +88,9 @@ const HouseDetails = () => {
       )}
       <div className="more-info__card">
         <div className="popup__container">
-          <h3 className="h3-title">{selectedHouse.title}</h3>
+          <h3 className="h3-title">{location.state.selectedHouse.title}</h3>
           <Slider {...sliderSettings}>
-            {selectedHouse.imageSrc.map((image, index) => (
+            {location.state.selectedHouse.imageSrc.map((image, index) => (
               <div key={index}>
                 <img
                   src={`http://localhost:3666/${image}`}
@@ -100,33 +101,33 @@ const HouseDetails = () => {
             ))}
           </Slider>
           <p>
-            <strong>Description:</strong> {selectedHouse.description}
+            <strong>Description:</strong> {location.state.selectedHouse.description}
           </p>
           <p>
-            <strong>Number of guests:</strong> {selectedHouse.guestCount}
+            <strong>Number of guests:</strong> {location.state.selectedHouse.guestCount}
           </p>
           <p>
-            <strong>Category:</strong> {selectedHouse.category}
+            <strong>Category:</strong> {location.state.selectedHouse.category}
           </p>
           <p>
-            <strong>Nº of rooms:</strong> {selectedHouse.roomCount}{" "}
+            <strong>Nº of rooms:</strong> {location.state.selectedHouse.roomCount}{" "}
           </p>
           <p>
-            <strong>Nº of bathrooms:</strong> {selectedHouse.bathroomCount}
+            <strong>Nº of bathrooms:</strong> {location.state.selectedHouse.bathroomCount}
           </p>
           <p><strong>Total Price:</strong> {location.state.selectedHouse.price}</p>
           <div className="amenities__block">
             <p>
               <strong>Amenities:</strong>
             </p>
-            {selectedHouse.amenities.map((amenity, index) => (
+            {location.state.selectedHouse.amenities.map((amenity, index) => (
             <p key={index} style={{ marginBottom: "10px" }}>
                 - <AmenityIcon amenity={amenity} /> {amenity}
             </p>
             ))}
           </div>
           <div className="search__buttons">
-            {location.state.arrivalDate && location.state.departDate && (
+            {location.state.selectedHouse.startDate && location.state.selectedHouse.endDate && (
               <button
                 className="reservation__button button-74"
                 onClick={handleReservation}
@@ -134,7 +135,7 @@ const HouseDetails = () => {
                 Reservation
               </button>
             )}
-            {!location.state.arrivalDate && !location.state.departDate && (
+            {!location.state.selectedHouse.startDate && !location.state.selectedHouse.endDate && (
               <button
                 className="reservation__button button-74"
                 onClick={handleAvailableDates}
