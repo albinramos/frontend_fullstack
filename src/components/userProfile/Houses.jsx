@@ -78,7 +78,7 @@ const Houses = ({ userId }) => {
     <div>
       <h3>Your Houses</h3>
       
-      <button className="add-house-button" onClick={() => window.location.href = `/housecreation/${houses[0].userId}`}>
+      <button className="add-house-button" onClick={() => window.location.href = `/housecreation`}>
   Add House
 </button>
       

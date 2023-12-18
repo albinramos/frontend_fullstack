@@ -16,7 +16,7 @@ const Navbar = ({ setActiveSection, activeSection }) => {
         });
   
         if (response.ok) {
-          window.location.href = 'http://localhost:5173/';
+          window.location.href = 'http://localhost:5173/login';
         } else {
           console.error('Error al cerrar sesión');
         }

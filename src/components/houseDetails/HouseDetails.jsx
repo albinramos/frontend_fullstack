@@ -39,6 +39,9 @@ const HouseDetails = () => {
       const guests = location.state.guests;
       const price = selectedHouse.price;
       const userId = localStorage.getItem("userId");
+      const img = selectedHouse.imageSrc;
+      console.log('imaaaaagen:',img);
+      console.log('SEEEEEEELEEEEEECTED:', selectedHouse);
 
       const body = {
         houseId,
@@ -72,6 +75,8 @@ const HouseDetails = () => {
   console.log(location.state.arrivalDate);
   console.log(location.state.departDate);
   console.log(location.state.guests);
+  console.log(location.state.selectedHouse);
+  console.log(location.state.selectedHouse.price);
 
   return (
     <>
@@ -87,7 +92,7 @@ const HouseDetails = () => {
             {selectedHouse.imageSrc.map((image, index) => (
               <div key={index}>
                 <img
-                  src={image}
+                  src={`http://localhost:3666/${image}`}
                   alt={`House ${index + 1}`}
                   className="slider-img"
                 />
@@ -109,14 +114,15 @@ const HouseDetails = () => {
           <p>
             <strong>Nº of bathrooms:</strong> {selectedHouse.bathroomCount}
           </p>
+          <p><strong>Total Price:</strong> {location.state.selectedHouse.price}</p>
           <div className="amenities__block">
             <p>
               <strong>Amenities:</strong>
             </p>
             {selectedHouse.amenities.map((amenity, index) => (
-              <p key={index} style={{ marginBottom: "10px" }}>
+            <p key={index} style={{ marginBottom: "10px" }}>
                 - <AmenityIcon amenity={amenity} /> {amenity}
-              </p>
+            </p>
             ))}
           </div>
           <div className="search__buttons">

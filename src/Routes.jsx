@@ -19,7 +19,7 @@ const RoutesComponent = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/cities/:city" element={<SearchResults />} />
         <Route path="/housedetails/:id" element={<HouseDetails />} />
-        <Route path="/housecreation/:id" element={<HouseCreation />} />
+        <Route path="/housecreation" element={<HouseCreation />} />
         <Route path="/user" element={<UserProfilePage />} />
         
       </Routes>

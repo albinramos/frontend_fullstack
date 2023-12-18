@@ -108,7 +108,7 @@ const Landing = (isLoggedIn, handleLogout) => {
           const cityName = city.name;
           const citySlug = cityName.toLowerCase().replace(/\s/g, '-');
 
-          navigate(`/cities/${citySlug}`, { state: { data, city,        arrivalDate, departDate, guests } });
+          navigate(`/cities/${citySlug}`, { state: { data, city, arrivalDate, departDate, guests } });
   
           } catch (error) {
             console.log("Error fetching search data:", error);
@@ -149,7 +149,7 @@ const Landing = (isLoggedIn, handleLogout) => {
         {isLoggedIn && isMenuOpen && (
           <div className="user-menu">
             <p onClick={() => navigate('/user')} className='menu-option'>User Details</p>
-            <p onClick={() => navigate('/housecreation/:id')} className='menu-option'>Add House</p>
+            <p onClick={() => navigate('/housecreation')} className='menu-option'>Add House</p>
             <p onClick={handleLogout} className='menu-option'>Logout</p>
           </div>
         )}
@@ -170,11 +170,12 @@ const Landing = (isLoggedIn, handleLogout) => {
         <div className='landing__container'>
           {randomHouses.map((house, index) => {
             let imageElement;
-
+            const imagePath = `http://localhost:3666/${house.imageSrc[0]}`;
             if (house.imageSrc && house.imageSrc.length > 0) {
               imageElement = (
-                <img src={house.imageSrc[0]} alt={`House ${index + 1}`} className='landing__img' />
+                <img src={imagePath} alt={`House ${index + 1}`} className='landing__img' />
               );
+              console.log("house",house.imageSrc[0]);
             } else {
               imageElement = (
                 <img src='../src/assets/no-image.jpg' alt={`No Image`} className='landing__img' />

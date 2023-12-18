@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./houseCreation.css";
 import { useNavigate } from "react-router-dom";
 
@@ -15,6 +15,31 @@ const HouseCreation = () => {
     price: "",
     userId: "",
   });
+
+  useEffect(() => {
+    const fetchUserId = async () => {
+      try {
+        const response = await fetch('http://localhost:3666/landing/credentials', {
+          method: 'GET',
+          credentials: 'include',
+        });
+
+        if (!response.ok) {
+          if (response.status === 401) {
+            window.location.href = 'http://localhost:5173/login';
+            return;
+          } else {
+            console.error(`Error al obtener datos del usuario: ${response.status}`);
+            return;
+          }
+        }
+      } catch (error) {
+        console.error('Error al obtener datos del usuario:', error.message);
+      }
+    };
+
+    fetchUserId();
+  }, []); 
 
 
   const handleChanges = (event) => {

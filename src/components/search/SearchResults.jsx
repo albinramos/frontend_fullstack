@@ -13,11 +13,13 @@ const SearchResults = () => {
   const [selectedHouse, setSelectedHouse] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
+  const data = location.state;
+  console.log('data:', data); 
 
   const handleMoreInfoClick = (house) => {
     setSelectedHouse(house);
     // Utiliza navigate para redirigir a HouseDetails y pasar la información en state
-    navigate(`/housedetails/${house.id}`, { state: { selectedHouse: house, arrivalDate: location.state.arrivalDate, departDate: location.state.departDate, guests: location.state.guests } });
+    navigate(`/housedetails/${house._id}`, { state: { selectedHouse: house, arrivalDate: location.state.arrivalDate, departDate: location.state.departDate, guests: location.state.guests } });
   };
 
 
@@ -127,7 +129,7 @@ const SearchResults = () => {
                 <p>Guest Count: {house.guestCount}</p>
                 <div className="houses__photos">
                   {house.imageSrc.length > 0 ? (
-                    <img className="houses__img" src={house.imageSrc[0]} alt={`House ${index + 1} - Photo 1`} />
+                    <img className="houses__img" src={`http://localhost:3666/${house.imageSrc[0]}`} alt={`House ${index + 1} - Photo 1`} />
                   ) : (
                     <img src="../src/assets/no-image.jpg" alt="No Image" />
                   )}

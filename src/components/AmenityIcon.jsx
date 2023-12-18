@@ -2,11 +2,12 @@ import React from 'react';
 import { FaWifi, FaSwimmingPool, FaParking, FaHotTub } from 'react-icons/fa';
 import { LuAirVent } from 'react-icons/lu';
 import { FaElevator } from 'react-icons/fa6';
-import { MdBalcony, MdFireplace } from "react-icons/md";
+import { MdBalcony, MdFireplace, MdOutlineIron } from "react-icons/md";
 import { FaKitchenSet } from "react-icons/fa6";
 import { BiSolidWasher } from "react-icons/bi";
 import { CgGym } from "react-icons/cg";
-import { GiFlowerPot } from "react-icons/gi";
+import { GiFlowerPot, GiBarbecue } from "react-icons/gi";
+import { PiTelevisionBold } from "react-icons/pi";
 
 
 
@@ -36,6 +37,12 @@ const AmenityIcon = ({ amenity }) => {
       return <FaHotTub />;
     case 'garden':
       return <GiFlowerPot />;
+    case 'tv':
+      return <PiTelevisionBold />;
+    case 'bbq':
+      return <GiBarbecue />;
+    case 'iron':
+      return <MdOutlineIron />;
     default:
       return null;
   }
