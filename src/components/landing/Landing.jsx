@@ -40,10 +40,25 @@ const Landing = (isLoggedIn, handleLogout) => {
     navigate(`/housedetails/${house.id}`, { state: { selectedHouse: house } });
   };
 
-  const handleLogoutClick = () => {
+  const handleLogoutClick = async () => {
     // Llamar a la función de logout
-    handleLogout();
+      try {
+        const response = await fetch('http://localhost:3666/login/end', {
+          method: 'POST',
+          credentials: 'include',
+        });
+  
+        if (response.ok) {
+          window.location.href = 'http://localhost:5173/login';
+        } else {
+          console.error('Error al cerrar sesión');
+        }
+      } catch (error) {
+        console.error('Error al cerrar sesión:', error.message);
+      }
+
   };
+  
 
   const handleLandingClick = () => {
     // Use the navigate function to go to the login page
@@ -150,7 +165,7 @@ const Landing = (isLoggedIn, handleLogout) => {
           <div className="user-menu">
             <p onClick={() => navigate('/user')} className='menu-option'>User Details</p>
             <p onClick={() => navigate('/housecreation')} className='menu-option'>Add House</p>
-            <p onClick={handleLogout} className='menu-option'>Logout</p>
+            <p onClick={handleLogoutClick} className='menu-option'>Logout</p>
           </div>
         )}
         <h1>Landing</h1>

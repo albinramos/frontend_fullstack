@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./houseCreation.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { FaBackspace } from "react-icons/fa";
 
 const HouseCreation = () => {
   const [formData, setFormData] = useState({
@@ -137,7 +138,14 @@ const HouseCreation = () => {
   const navigate = useNavigate();
 
   return (
+    
     <form onSubmit={creationHandler} encType="multipart/form-data" className="form__house-creation">
+      <div className='go-back-div'>
+            <Link to="/">
+              <FaBackspace className="back-icon" />
+              {FaBackspace}
+            </Link>
+          </div>
       <label htmlFor="title">Title</label>
       <input
         type="text"
@@ -269,6 +277,7 @@ const HouseCreation = () => {
       />
       <button type="submit" className="button-74">Create House</button>
     </form>
+    
   );
 };
 

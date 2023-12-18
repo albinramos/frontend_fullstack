@@ -1,6 +1,8 @@
 
 import React from 'react';
 import "./userProfile.css"
+import { Link, useNavigate } from "react-router-dom";
+import { FaBackspace } from "react-icons/fa";
 
 
 const Navbar = ({ setActiveSection, activeSection }) => {
@@ -27,6 +29,12 @@ const Navbar = ({ setActiveSection, activeSection }) => {
   
     return (
         <div className='sidebar--container'>
+          <div className='go-back-div'>
+            <Link to="/">
+              <FaBackspace className="back-icon" />
+              {FaBackspace}
+            </Link>
+          </div>
       <ul className="sidebar">
         <li
           className={`sidebar-item ${activeSection === 'userinfo' ? 'sidebar-item-active' : ''}`}

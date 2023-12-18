@@ -23,3 +23,15 @@
   text-align: center;
   justify-content: center;
 }
+
+.go-back-div{
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 20px;
+
+}
+
+.back-icon{
+  font-size: 35px;
+  color: black;
+}
