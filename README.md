@@ -1,4 +1,4 @@
-# Bundesliga
+# MiCasa App
 
 ¡Bienvenido a MiCasa App, tu solución integral para la reserva de casas! Este proyecto Full Stack desarrollado con la tecnología MERN (MongoDB, Express.js, React.js y Node.js) tiene como objetivo simplificar y mejorar la experiencia de reserva de alojamientos, inspirado en el popular servicio de Airbnb.
 
