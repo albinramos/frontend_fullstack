@@ -7,8 +7,7 @@
 
 .sidebar--container {
     display: flex;
-    height: auto;
-    min-height: 1200px;
+    height: 250px;
     border-radius: 10%;
     margin-top: 60px;
     margin-left: 15px;
@@ -21,11 +20,12 @@
     margin: 0;
     display: flex;
     flex-direction: column;
-    width: 200px;
+    width: 80%;
     background-color: #f4f4f4;
     gap: 20px;
     border-radius: 4px;
     margin-bottom: 5px;
+    height: 230px;
   }
   
   .sidebar-item {
@@ -34,23 +34,25 @@
     border: 1px  #ccc;
     border-radius: 4px;
     cursor: pointer;
+
   }
   .sidebar-item:hover{
     border: 1px solid  #ccc;
   }
   
   .sidebar-item-active {
-    background-color: #aaf;
-    color: #fff;
+    background-color: #FFD494;
+    color: black;
   }
   
   .user-profile-container {
     display: flex;
     flex: 1;
     height: auto;
-    min-height: 1200px;
-    background-color: #ccc;
+    max-height: 1000px;
+    background-color: #ffffff;
     border-radius: 10px;
+    flex-direction: column;
   }
   
   .user-profile-content {
@@ -138,13 +140,14 @@
   }
   
   .user-info-card {
-    margin-top: 60px;
+    margin-top: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    
     padding: 15px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+    margin-right: 20px;
   }
   
   .user-info-title {

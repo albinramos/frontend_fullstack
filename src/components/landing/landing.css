@@ -187,11 +187,13 @@
   display: flex;
   flex-direction: row;
   margin: auto;
+  text-align: left;
 }
 
 .landing__house-card-block2{
   display: flex;
   flex-direction: row;
+  text-align: left;
 }
 
 

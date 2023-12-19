@@ -83,7 +83,7 @@ const Register = () => {
     <input type="password" placeholder="Password" className='form__password'name='password'/>
     <input type="password" placeholder="Confirm Password" className='form__password'name='confirmPassword'/>
     <p className='register__photo'>Select your profile photo:</p>
-    <input type='file' className='form__file'name='image'/>
+    <input type='file' className='form__file photo-form'name='image' />
     <button type="submit" className='button-74'>Register</button>
   </form>  
   </section>

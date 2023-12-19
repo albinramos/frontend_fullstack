@@ -6,6 +6,8 @@ import { FaBackspace } from "react-icons/fa";
 
 
 const Navbar = ({ setActiveSection, activeSection }) => {
+
+
     const handleNavigation = (section) => {
       setActiveSection(section);
     };

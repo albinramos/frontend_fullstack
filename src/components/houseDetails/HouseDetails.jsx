@@ -81,11 +81,7 @@ const HouseDetails = () => {
 
   return (
     <>
-      {isReserved && (
-        <div className="flash-notice">
-          <p>Reservation successful!</p>
-        </div>
-      )}
+
       <div className="more-info__card">
         <div className="popup__container">
           <h3 className="h3-title">{location.state.selectedHouse.title}</h3>
@@ -100,6 +96,13 @@ const HouseDetails = () => {
               </div>
             ))}
           </Slider>
+          {isReserved && (
+          <div className="flash-notice">
+          <p className="flash-notice-p">Reservation     successful!</p>
+            </div>
+          )}
+          <div className="details-block-0">
+          <div className="details-block-1">
           <p>
             <strong>Description:</strong> {location.state.selectedHouse.description}
           </p>
@@ -109,6 +112,8 @@ const HouseDetails = () => {
           <p>
             <strong>Category:</strong> {location.state.selectedHouse.category}
           </p>
+          </div>
+          <div className="details-block-2">
           <p>
             <strong>Nº of rooms:</strong> {location.state.selectedHouse.roomCount}{" "}
           </p>
@@ -116,6 +121,8 @@ const HouseDetails = () => {
             <strong>Nº of bathrooms:</strong> {location.state.selectedHouse.bathroomCount}
           </p>
           <p><strong>Total Price:</strong> {location.state.selectedHouse.price}€</p>
+          </div>
+          </div>
           <div className="amenities__block">
             <p>
               <strong>Amenities:</strong>
