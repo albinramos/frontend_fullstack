@@ -62,7 +62,7 @@ body{
 .house__card{
   padding: 20px;
   width: 90%;
-  background-color: #3a87d4dd;
+  background-color: #FFEBCC;
   border-radius: 10px;
   margin-bottom: 80px;
 }
@@ -223,7 +223,7 @@ body{
   }
 
   .button-74 {
-    min-width: 120px;
+    min-width: 200px;
     padding: 0 25px;
   }
 

@@ -115,7 +115,7 @@ const HouseDetails = () => {
           <p>
             <strong>Nº of bathrooms:</strong> {location.state.selectedHouse.bathroomCount}
           </p>
-          <p><strong>Total Price:</strong> {location.state.selectedHouse.price}</p>
+          <p><strong>Total Price:</strong> {location.state.selectedHouse.price}€</p>
           <div className="amenities__block">
             <p>
               <strong>Amenities:</strong>

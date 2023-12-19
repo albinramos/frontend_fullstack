@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;500;700&display=swap');
+
+body{
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #FFBC59;
+}
+
 .form__house-creation{
   display: flex;
   flex-direction: column;
@@ -5,14 +14,27 @@
 
 
 .from__house-creation-input{
-  margin: 10px;
+
   display: flex;
   font-size: 18px;
   border-radius: 10px;
   height: 30px;
   text-align: center;
   justify-content: center;
+  width: 80%;
+  margin: auto;
+  margin-bottom: 20px;
 }
+
+
+.label-creation{
+  margin-bottom: 20px;
+}
+
+.from__house-creation-input-button{
+  width: 30%;
+}
+
 
 .from__house-creation-select{
   margin: 10px;
@@ -34,4 +56,30 @@
 .back-icon{
   font-size: 35px;
   color: black;
+}
+
+@media screen and (min-width: 768px){
+  .button-74{
+    width: 40%;
+    margin: auto;
+  }
+}
+
+@media screen and (min-width: 1024px){
+
+  .from__house-creation-input{
+    width: 40%;
+  }
+
+  .from__house-creation-select{
+    width: 40%;
+    margin: auto;
+  }
+
+  .button-74{
+    width: 20%;
+    margin: auto;
+  }
+
+
 }

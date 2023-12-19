@@ -3,6 +3,9 @@
   flex-direction: column;
 }
 
+.form__phone{
+  justify-content: center;
+}
 
 
 .form__name, 
@@ -11,10 +14,37 @@
 .form__phone,
 .form__password,
 .form__file{
-  margin-bottom: 20px;
+  
+  margin: 10px;
+  display: flex;
+  font-size: 18px;
+  border-radius: 10px;
+  height: 30px;
+  text-align: center;
+  font-weight: 100;
 }
 
 .register__photo{
   display: flex;
-  justify-content: start;
+  justify-content: center;
+}
+
+.go-back-div-register{
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media screen and (min-width: 1024px){
+.form__name, 
+.form__last,
+.form__email,
+.form__phone,
+.form__password,
+.form__file{
+  display: flex;
+  justify-content: center;
+  width: 40%;
+  margin: auto;
+  margin-bottom: 20px;
+}
 }

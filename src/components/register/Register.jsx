@@ -60,7 +60,7 @@ const Register = () => {
 
   return (
     <div style={pageStyles}>
-      <div className='go-back-div'>
+      <div className='go-back-div-register'>
           <Link to="/login">
             <FaBackspace className="back-icon" />
             {FaBackspace}

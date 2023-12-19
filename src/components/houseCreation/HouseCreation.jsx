@@ -146,7 +146,6 @@ const HouseCreation = () => {
             {FaBackspace}
           </Link>
       </div>
-      <label htmlFor="title">Title</label>
       <input
         type="text"
         id="title"
@@ -155,29 +154,29 @@ const HouseCreation = () => {
         value={formData.title}
         onChange={handleChanges}
         className="from__house-creation-input"
+        placeholder="Title"
       />
-      <label htmlFor="description">Description</label>
       <textarea
         id="description"
         name="description"
         value={formData.description}
         onChange={handleChanges} 
         className="from__house-creation-input"
+        placeholder="Description"
       />
-      <label htmlFor="category">Category</label>
     <select
       id="category"
       name="category"
       value={formData.category}
       onChange={handleChanges}
       className="from__house-creation-input"
+      placeholder="Category"
     >
       <option value="">Select category</option>
       <option value="chalet">Chalet</option>
       <option value="apartment">Apartment</option>
       <option value="flat">Flat</option>
     </select>
-      <label htmlFor="roomCount">Room Count</label>
       <input
         type="number"
         id="roomCount"
@@ -187,8 +186,8 @@ const HouseCreation = () => {
         value={formData.roomCount}
         onChange={handleChanges}
         className="from__house-creation-input"
+        placeholder="Room Count"
        />
-      <label htmlFor="bathroomCount">Bathroom Count</label>
       <input
         type="number"
         id="bathroomCount"
@@ -198,8 +197,8 @@ const HouseCreation = () => {
         value={formData.bathroomCount}
         onChange={handleChanges} 
         className="from__house-creation-input"
+        placeholder="Bathroom Count"
       />
-      <label htmlFor="guestCount">Guest Count</label>
       <input
         type="number"
         id="guestCount"
@@ -209,8 +208,9 @@ const HouseCreation = () => {
         value={formData.guestCount}
         onChange={handleChanges} 
         className="from__house-creation-input"
+        placeholder="Guest Count"
       />
-      <label htmlFor="locationValue">
+      <label htmlFor="locationValue" className="label-creation">
         Write your property location to obtain the coordinates
       </label>
       <div>
@@ -265,7 +265,7 @@ const HouseCreation = () => {
         onChange={handleChanges}
         className="from__house-creation-input"
       />
-      <label htmlFor="foto">Select a photo of your property, maximum 5 photos</label>
+      <label htmlFor="foto" className="label-creation">Select a photo of your property, maximum 5 photos</label>
       <input
         type="file"
         id="foto"

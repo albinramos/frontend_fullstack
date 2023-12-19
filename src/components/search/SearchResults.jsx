@@ -134,6 +134,7 @@ const SearchResults = () => {
                 <h2 className="houses__h2-title">{house.title}</h2>
                 <p>City: {location.state.city.name}</p>
                 <p>Guest Count: {house.guestCount}</p>
+                <p>Total Price: {house.price}€</p>
                 <div className="houses__photos">
                   {house.imageSrc.length > 0 ? (
                     <img className="houses__img" src={`http://localhost:3666/${house.imageSrc[0]}`} alt={`House ${index + 1} - Photo 1`} />

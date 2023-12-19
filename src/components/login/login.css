@@ -8,8 +8,8 @@ body{
 }
 
 .logo-login{
-  width: 150px;
-  height: 150px;
+  width: 250px;
+  height: 250px;
   margin: auto;
 }
 
@@ -41,4 +41,19 @@ body{
   height: 30px;
   text-align: center;
   font-weight: 100;
+}
+
+@media screen and (min-width: 1024px){
+
+  .form__email,
+  .form__password{
+    width: 40%;
+    margin: auto;
+}
+
+.form__email{
+  margin-top: 20px;
+}
+
+
 }
