@@ -120,10 +120,10 @@ const HouseDetails = () => {
             <p>
               <strong>Amenities:</strong>
             </p>
-            {location.state.selectedHouse.amenities.map((amenity, index) => (
-            <p key={index} style={{ marginBottom: "10px" }}>
-                - <AmenityIcon amenity={amenity} /> {amenity}
-            </p>
+            {location.state.selectedHouse.amenities[0].split(',').map((amenity, index) => (
+              <p key={index} style={{ marginBottom: "10px" }}>
+                - <AmenityIcon amenity={amenity.trim()} /> {amenity}
+              </p>
             ))}
           </div>
           <div className="search__buttons">
@@ -137,7 +137,7 @@ const HouseDetails = () => {
             )}
             {!location.state.selectedHouse.startDate && !location.state.selectedHouse.endDate && (
               <button
-                className="reservation__button button-74"
+                className="available reservation__button button-74"
                 onClick={handleAvailableDates}
               >
                 Find available dates

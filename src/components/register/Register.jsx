@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import 'react-international-phone/style.css';
 import { PhoneInput } from 'react-international-phone';
 import './register.css';
+import { Link, useNavigate } from "react-router-dom";
+import { FaBackspace } from "react-icons/fa";
 
 
 const Register = () => {
@@ -58,6 +60,12 @@ const Register = () => {
 
   return (
     <div style={pageStyles}>
+      <div className='go-back-div'>
+          <Link to="/login">
+            <FaBackspace className="back-icon" />
+            {FaBackspace}
+          </Link>
+      </div>
     <section className="register">
     <img src='../src/assets/logo.jpg' alt='logo' className='logo-login'/>
     <h1>REGISTER</h1>

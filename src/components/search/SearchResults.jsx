@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { useNavigate } from 'react-router-dom'; 
+import { Link, useNavigate } from 'react-router-dom'; 
+import { FaBackspace } from "react-icons/fa";
 import 'leaflet/dist/leaflet.css';
 import './search.css';
 import 'slick-carousel/slick/slick.css';
@@ -106,6 +107,12 @@ const SearchResults = () => {
   return (
     <div style={pageStyles}>
       <section className="search">
+      <div className='go-back-div'>
+          <Link to="/">
+            <FaBackspace className="back-icon" />
+            {FaBackspace}
+          </Link>
+      </div>
         <h1 className='search__h1'>Search Results</h1>
         <div className="map">
           <MapContainer center={[location.state.city.lat, location.state.city.lon]} zoom={13} scrollWheelZoom={true}>

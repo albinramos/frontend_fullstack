@@ -168,7 +168,7 @@ const Landing = (isLoggedIn, handleLogout) => {
             <p onClick={handleLogoutClick} className='menu-option'>Logout</p>
           </div>
         )}
-        <h1>Landing</h1>
+        <h1>Home Rentals</h1>
         <div className='landing__input'>
           <form className='landing__form' onSubmit={handleSubmit}>
             <label for='city' className="city-autosuggest-title">City</label>
