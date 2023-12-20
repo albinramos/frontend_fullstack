@@ -63,7 +63,7 @@ const Reservations = ({ userId }) => {
                   Start Date: {new Date(reservation.startDate).toLocaleDateString()} <br />
                   End Date: {new Date(reservation.endDate).toLocaleDateString()}
                 </div>
-                <div className="reservation-card-price">Price: ${reservation.price}</div>
+                <div className="reservation-card-price">Price: {reservation.price}€</div>
                
               </div>
             ))}

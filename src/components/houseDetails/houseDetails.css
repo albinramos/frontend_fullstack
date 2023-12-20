@@ -29,6 +29,27 @@ body{
   margin: 20px;
 }
 
+.flash-notice {
+  opacity: 0;
+  transition: opacity 1000ms ease-in-out;
+}
+
+.flash-notice-enter {
+  opacity: 0.01;
+}
+
+.flash-notice-enter-active {
+  opacity: 1;
+}
+
+.flash-notice-exit {
+  opacity: 1;
+}
+
+.flash-notice-exit-active {
+  opacity: 1;
+}
+
 
 @media screen and (min-width: 768px){
   .search__buttons{

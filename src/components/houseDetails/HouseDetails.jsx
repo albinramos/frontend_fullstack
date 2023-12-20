@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { CSSTransition } from "react-transition-group";
 import "./houseDetails.css";
 import { useLocation } from "react-router-dom";
 import Slider from "react-slick";
@@ -96,11 +97,16 @@ const HouseDetails = () => {
               </div>
             ))}
           </Slider>
-          {isReserved && (
-          <div className="flash-notice">
-          <p className="flash-notice-p">Reservation     successful!</p>
+          <CSSTransition
+            in={isReserved}
+            timeout={1000}
+            classNames="flash-notice"
+            unmountOnExit
+          >
+            <div className="flash-notice">
+              <p className="flash-notice-p">Reservation   successful!</p>
             </div>
-          )}
+          </CSSTransition>
           <div className="details-block-0">
           <div className="details-block-1">
           <p>

@@ -9,6 +9,20 @@ import { FaBackspace } from "react-icons/fa";
 const Register = () => {
 
   const [isRegister, setIsRegister] = useState(false);
+  const [passwordError, setPasswordError] = useState('');
+  const validatePassword = (password) => {
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+    if (!passwordRegex.test(password)) {
+      setPasswordError(
+        'Password must have at least 8 characters, 1 uppercase letter and 1 number'
+      );
+      return false;
+    }
+
+    setPasswordError('');
+    return true;
+  };
 
   const registerHandler = async (e) => {
     e.preventDefault();
@@ -29,6 +43,12 @@ const Register = () => {
         password,
         confirmPassword,
       };
+
+      if (!validatePassword(password)) {
+        return;
+      }
+
+
       console.log(body);
       const result = await fetch('http://localhost:3666/user', 
       {
@@ -81,6 +101,7 @@ const Register = () => {
     />
   </div>
     <input type="password" placeholder="Password" className='form__password'name='password'/>
+    <div className="password-error">{passwordError}</div>
     <input type="password" placeholder="Confirm Password" className='form__password'name='confirmPassword'/>
     <p className='register__photo'>Select your profile photo:</p>
     <input type='file' className='form__file photo-form'name='image' />
